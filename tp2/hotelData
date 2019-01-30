@@ -1,25 +1,19 @@
-set search_path = hotelDB;
+SET search_path = hotelDB;
 
-insert into hoteldb.Hotel values ('H111', 'Grosvenor Hotel', 'London');
-insert into hoteldb.Hotel values ('H112', 'Kingston Hotel', 'Kingston');
-insert into hoteldb.Hotel values ('H113', 'Hotel des pas perdus', 'Montreal');	
+INSERT INTO HotelDB.Hotel VALUES ('H111', 'Grosvenor Hotel', 'London');
+INSERT INTO HotelDB.Hotel VALUES ('H112', 'Kingston Hotel', 'Kingston');
+INSERT INTO HotelDB.Hotel VALUES ('H113' , 'Hotel des pas perdus', 'Montreal');
 
-insert into hoteldb.Room values ('1', 'H111', 'S', 72.00);
-insert into hoteldb.Room values ('2', 'H111', 'S', 100.00);
-insert into hoteldb.Room values ('3', 'H111', 'D', 200.00);
-insert into hoteldb.Room values ('1', 'H112', 'D', 450.00);
+INSERT INTO HOTELDB.ROOM VALUES ('1', 'H111', 'S', 72.00);
+INSERT INTO HOTELDB.ROOM VALUES ('2', 'H111', 'S', 100.00);
+INSERT INTO HOTELDB.ROOM VALUES ('3', 'H111', 'D', 200.00);
+INSERT INTO HOTELDB.ROOM VALUES ('1', 'H112', 'D', 450.00);
 
+INSERT INTO HOTELDB.GUEST (guestID, nas, guestName, gender, city) VALUES ('G111', 123456789, 'John Smith','M', 'London');
+INSERT INTO HOTELDB.GUEST (guestNo, nas, guestName, gender, City) VALUES ('G112', 234567890, 'Alex L', 'M', 'Kingston');
+INSERT INTO HOTELDB.GUEST (guestNo, nas, guestName, gender, City) VALUES ('G113', 123456780, 'Idris S','F', 'Montreal');
+INSERT INTO HOTELDB.GUEST (guestNo, nas, guestName, gender, City) VALUES ('G114', 987654321, 'Guillaume D','M', 'Quebec');
 
-insert into hoteldb.Guest values ('G111', 'John Smith', 'London', '123456789');
-insert into hoteldb.Guest values ('G112', 'Alex L', 'Kingston', '123412345');
-insert into hoteldb.Guest values ('G113', 'Idris S', 'Montreal', '098765432');
-insert into hoteldb.Guest values ('G114', 'Guillaume D', 'Quebec', '620539576');
+UPDATE hoteldb.guest set  guestName = 'Alexandra L.' where guestNo='G112';
 
-insert into hoteldb.Booking values ('H111', 'G111', DATE'2016-03-01', DATE'2016-04-04', '1');
-insert into hoteldb.Booking values ('H111', 'G114', DATE'2016-03-01', DATE'2016-03-05', '3');
-insert into hoteldb.Booking values ('H111', 'G116', DATE'2016-03-04', DATE'2016-01-06', '4');
-
-
-update hoteldb.Guest set guestName = 'Alexandra L.' where guestNo ='G112';
-
-select * from hoteldb.Booking;
+Select * FROM HOTELDB.BOOKING;
