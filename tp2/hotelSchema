@@ -1,0 +1,45 @@
+SET search_path = hoteldb;
+
+DROP SCHEMA IF EXISTS hoteldb CASCADE;
+create SCHEMA hoteldb;
+
+create TABLE IF NOT EXISTS Hotel(
+	hotelID varchar(10) NOT null,
+	city varchar(20) NOT null,
+	hotelName varchar(50) NOT null,
+	PRIMARY KEY (hotelID));
+				 
+				 
+create table if not exists Room(
+	roomID 		varchar(10) not null,
+	hotelID 	varchar(10) NOT null,
+	roomType 	varchar(10) not null,
+	price 		numeric(6,3) not null,
+	primary key (hotelID, roomID),
+	foreign key (hotelID) references Hotel (hotelID) on delete restrict on update cascade);
+
+create domain SexType as char check(value in ('M', 'F'));				 
+				 
+create table if not exists Guest(
+	guestID 	varchar(10) not null,
+	guestName 	varchar(50) not null,
+	nas 		varchar(9) 	not null,
+	gender 		SexType default 'M',
+	city 		varchar(5)	not null,
+	primary key (guestID),
+	unique(nas));
+				 
+create table if not exists Booking(
+	hotelID		varchar(10) not null,
+	roomID		varchar(10) not null,
+	guestID 	varchar(10) not null,
+	dateFrom 	date not null,
+	dateTo		date,
+	primary key (hotelID, roomID, guestID),
+	foreign key (guestID) references Guest (guestID) on update cascade on delete set null,
+	foreign key (hotelID, roomID) references Room (hotelID, roomID) on update cascade on delete no action,
+	constraint date check (dateTo >= dateFrom),
+	constraint dateFrom check (dateFrom >= current_date));		
+		
+	
+alter table Guest alter gender drop default;									
