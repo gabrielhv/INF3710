@@ -28,14 +28,15 @@ select sum(balance) from Compte;
 
 --Maintenant, dans le second terminal (rouge), démarrez une transaction et ajoutez un compte pour l’usager ‘Charlotte Gainsbourg’:
 
---Q4. Générez une liste de tous les comptes dans le terminal T2. Quelle sortie obtenez-vous ? 
+--Q4. Générez une liste de tous les comptes dans le terminal T2. Quelle sortie obtenez-vous ?
+/* On obtient une table contenant quatre tuples, incluant celui que l'on vient d'ajouter */
 
 
 ---Q5. Générez une liste de tous les comptes dans le terminal 1 (bleu). Quelle sortie obtenez-vous ? inclut-elle Charlotte Gainsbourg ? Pourquoi?
-
+/* Non, la table généré ne contient pas le tuple contenant celui ayant été ajouté dans le deuxième terminal */ 
 
 ---Q6. Validez la transaction dans le terminal T2 rouge et listez l’ensemble des comptes dans les deux terminaux.
-
+/* Les deux terminal affichent la table avec le tuple nouvellement ajouté*/
 
 --Vous voyez maintenant que les deux terminaux voient les mêmes données.
 -- validez la transaction dans T1
@@ -46,10 +47,14 @@ select sum(balance) from Compte;
 --Dans le second terminal rouge, commencez une transaction et enlevez 10$ du compte de Jane Birkin:
 
 --Q8. Que se passe-t-il dans le terminal T2 rouge. Pourquoi?
+/* Il y a une situation d'interblocage. Le terminal ne nous permet pas de continuer a effectuer des operations.*/
 --Essayons d’interrompre la transaction dans le terminal T1 (bleu) avec la commande abort
 abort;
 --Q9. Que se passe-t-il dans le terminal T2 rouge ?
+/* Il sera finalement possible de continuer a effectuer des operations sur le temrinal */ 
 --Q10. Valider la transaction dans le terminal T2.  Quel est le solde de Jane Birkin ? 
+/* 4995*/
+
 --Q11. Effectuons un transfert de 15$ entre Serge gainsbourg et Charlotte Gainsbourg. 
 --Dans un premier temps, dans le terminal T1 bleu, listez les soldes de tous les comptes. Ensuite commencez une transaction et effectuez le retrait de 15$ dans le terminal T2 rouge. 
 
@@ -72,3 +77,5 @@ update Compte set balance=balance+15 where username='cgain';
 
 -- Validez maintenant chaque transaction. Que se passe-t-il?
 commit;
+/* LE terminal effectuant la deuxieme transaction affiche le message "ERROR:  could not serialize access due to concurrent update";
+La deuxieme transaction ne peut etre efefctue et le commit de cette transaction effefctue un ROLLBACK*/ 
