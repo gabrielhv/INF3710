@@ -47,6 +47,9 @@ CREATE TABLE IF NOT EXISTS HOTELDB.Booking(
 
 
 ALTER TABLE HOTELDB.Guest ALTER gender DROP DEFAULT;
+								   
+								   
+							
 
 
 

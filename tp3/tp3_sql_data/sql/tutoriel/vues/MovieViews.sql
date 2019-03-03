@@ -1,4 +1,4 @@
-﻿---- MOVIE EXAMPLE --------------------------------------------------
+---- MOVIE EXAMPLE --------------------------------------------------
 
 DROP TABLE IF EXISTS Films CASCADE;
 
@@ -17,12 +17,23 @@ INSERT INTO Films (title, classification, kind) VALUES ('Com2', 'PG', 'comedy');
 -- A COMPLETER
 
 
+CREATE VIEW comedies AS 
+SELECT * 
+FROM films
+WHERE kind = 'comedy';
+
+
 ---- Toutes les insertions fonctionnent même la deuxième qui ne respecte pas la définition de la vue!
 INSERT INTO comedies (title, classification, kind) VALUES ('test1', 'U', 'comedy');   
 INSERT INTO comedies (title, classification, kind) VALUES ('test2', 'U', 'Drame');   
 
 -- Création de la vue universal_comedies
 -- A COMPLETER
+CREATE VIEW universal_comedies AS
+SELECT *
+FROM comedies
+WHERE classification = 'U';
+
 
 
 -- TEST DE LA VUE
@@ -38,6 +49,12 @@ DROP VIEW IF EXISTS universal_comedies  CASCADE;
 
 -- Création de la vue universal_comedies avec LOCAL CHECK OPTION
 -- A COMPLETER
+
+CREATE VIEW universal_comedies AS
+SELECT *
+FROM comedies
+WHERE classification = 'U'
+WITH LOCAL CHECK OPTION;
 
 -- TEST DE LA VUE
 --- Seule cette troisième insertion échoue à cause du LOCAL
@@ -55,6 +72,13 @@ DROP VIEW IF EXISTS pg_comedies  CASCADE;
 -- Création de la vue pg_comedies avec  CASCADED CHECK OPTION
 -- A COMPLETER
 
+CREATE VIEW pg_comedies AS
+SELECT *
+FROM comedies
+WHERE classification = 'PG'
+WITH CASCADED CHECK
+OPTION;
+
 -- TEST DE LA VUE
 --- Les deux premières insertions échouent
 INSERT INTO pg_comedies (title, classification, kind) VALUES ('test1', 'U', 'comedy');
@@ -62,3 +86,4 @@ INSERT INTO pg_comedies (title, classification, kind) VALUES ('test1', 'U', 'com
 INSERT INTO pg_comedies (title, classification, kind) VALUES ('test1', 'U', 'drama');
     
 INSERT INTO pg_comedies (title, classification, kind) VALUES ('test1', 'PG', 'comedy');
+

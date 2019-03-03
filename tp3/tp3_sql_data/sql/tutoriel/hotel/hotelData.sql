@@ -1,4 +1,4 @@
-﻿SET search_path = hotelDB;
+SET search_path = hotelDB;
 
 
 
@@ -21,20 +21,39 @@ INSERT INTO HOTELDB.Guest (guestNo, nas, guestName, gender, guestCity) VALUES ('
 INSERT INTO HOTELDB.Guest (guestNo, nas, guestName, gender, guestCity)VALUES ('G115', '122', 'Katrine S.',  'F', 'Kingston');
 INSERT INTO HOTELDB.Guest (guestNo, nas, guestName, gender, guestCity)VALUES ('G116', '111', 'Simon D', 'M',  'Kingston');
 
-INSERT INTO HOTELDB.Booking VALUES ('H111', 'G111', DATE'2017-03-01', DATE'2017-04-04', '1');
-INSERT INTO HOTELDB.Booking VALUES ('H111', 'G114', DATE'2017-03-01', DATE'2017-03-05', '3');
-INSERT INTO HOTELDB.Booking VALUES ('H111', 'G116', DATE'2017-03-03', DATE'2017-03-06', '4');
-INSERT INTO HOTELDB.Booking (hotelNo, guestNo, dateFrom, roomNo) VALUES ('H112', 'G115', DATE'2017-05-03',  '1');
+INSERT INTO HOTELDB.Booking VALUES ('H111', 'G111', DATE'2020-03-01', DATE'2020-04-04', '1');
+INSERT INTO HOTELDB.Booking VALUES ('H111', 'G114', DATE'2020-03-01', DATE'2020-03-05', '3');
+INSERT INTO HOTELDB.Booking VALUES ('H111', 'G116', DATE'2020-03-03', DATE'2020-03-06', '4');
+INSERT INTO HOTELDB.Booking (hotelNo, guestNo, dateFrom, roomNo) VALUES ('H112', 'G115', DATE'2020-05-03',  '1');
 
 UPDATE HOTELDB.Guest set guestName = 'Alexandra L.' where guestNo='G112';
 
 
 -- Quelle différence entre les deux delete ?
 
---- DELETE  from HOTELDB.HOTEL where hotelNo='H111';
----- DELETE  from HOTELDB.HOTEL where hotelNo='H113';
+DELETE  from HOTELDB.HOTEL where hotelNo='H111';
+DELETE  from HOTELDB.HOTEL where hotelNo='H113';
 
--- Que se passe-t- il avec la requête suivante ?
+-- Que se passe-t- il avec la requête suivante ? Le deuxieme fonctionne car il n'existe pas de room dans le hotel h113, tandis que dans le hotel 
+-- h111, il y a des room, alors il y aura des contraintes de on delete constraint empechant le delete
  
----  DELETE  from GUEST where guestNo='G111';
+DELETE  from GUEST where guestNo='G111';
+
+-- Le probleme avec cette requete est que le guest est supprime avec succes. Toutefois, il est encore reference dans la table booking
+-- qui contient une contrainte not null. 
+
+
+
+
+CREATE OR REPLACE FUNCTION totalHotelRecords()
+RETURNS integer AS $total$
+declare
+	total integer;
+BEGIN
+	SELECT count(*) into total FROM hotelDB.hotel;
+	RETURN total;
+END;
+$total$ LANGUAGE plpgsql;
+
+select totalHotelRecords();
 		
