@@ -52,3 +52,13 @@ create table if not exists Inscription(
 	foreign key (sid) references Etudiant(sid),
 	foreign key (cno, sectno) references Section(cno, sectno)
 );
+
+create table if not exists Audit(
+	sid				varchar(10) not null,
+	cno				varchar(10) not null,
+	sectno			varchar(10) not null,
+	note			int check(note >= 0 AND note <= 100),
+	dateModif		date,	
+	primary key (sid, cno, sectno, dateModif),
+	foreign key (sid, cno, sectno) references Inscription(sid, cno, sectno)
+);

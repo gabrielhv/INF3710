@@ -106,6 +106,19 @@ select max(e.age)-min(e.age) as Difference
 from Etudiant e;
 
 -- 14
-select count(cast(e.moyenne as numeric(2,1)) > AVG(cast(e.moyenne as numeric(2,1))
-from Etudiant e;
+select count(*)
+from Etudiant e
+where cast(e.moyenne as numeric(2,1)) > (
+	select AVG(cast(moyenne as numeric(2,1)))
+	from Etudiant
+);
+					
+-- 15
+select snom, moyenne
+from Etudiant
+where cast(moyenne as numeric(2,1)) = (
+	select max(cast(moyenne as numeric(2,1)))
+	from Etudiant									 
+);
+					
 
