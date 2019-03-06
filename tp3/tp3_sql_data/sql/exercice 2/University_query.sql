@@ -49,7 +49,7 @@ where e.snom not in (
 -- 9
 select *
 from Cours
-where Cours.cnom like '%_eometrie%';
+where LOWER(Cours.cnom) like '%geometrie%';
 
 -- 10
 select e.snom
