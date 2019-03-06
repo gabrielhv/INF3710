@@ -59,7 +59,7 @@ where e.snom in (
 	from Etudiant, Inscription i, Cours
 	where Etudiant.sid = i.sid
 	AND i.cno = Cours.cno
-	AND Cours.cnom like '%_eometrie%'
+	AND LOWER(Cours.cnom) like '%geometrie%'
 );
 
 -- 11
