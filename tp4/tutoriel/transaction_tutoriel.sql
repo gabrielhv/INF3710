@@ -25,9 +25,9 @@ select sum(balance) from Compte;
 --Q3. Nous allons maintenant simuler des transactions concurrentes en ouvrant deux terminaux psql.  
 --- Nous allons utiliser la couleur bleue et rouge pour les différencier (voir le document pdf qui accompagne le TP)
 --Ecrivez une transaction dans le terminal T1 qui affiche tous les comptes. 
-
+select * from Compte;
 --Maintenant, dans le second terminal (rouge), démarrez une transaction et ajoutez un compte pour l’usager ‘Charlotte Gainsbourg’:
-
+insert into Compte values ('cgainsbourg', 'Charlotte Gainsbourg', 2000);
 --Q4. Générez une liste de tous les comptes dans le terminal T2. Quelle sortie obtenez-vous ?
 /* On obtient une table contenant quatre tuples, incluant celui que l'on vient d'ajouter */
 
