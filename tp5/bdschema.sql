@@ -62,7 +62,6 @@ create table if not exists examDetails (
 	examID		      varchar(10) not null,
 	examdate	      date not null,
 	examHour	      hour not null,
-	vetName		      varchar(10) not null,
 	description	    varchar(10) not null,
 	animalID	      varchar(10) not null,
 	vetID		        varchar(10) not null,
@@ -80,10 +79,10 @@ create table if not exists treatment(
 
 create table if not exists treatmentDetails (
 	treatmentNumber	      varchar(10) not null, 
-	examID				        varchar(10) not null,
-  quantity              varchar(10) not null,
-  startDate             date not null,
-  endDate               date not null,
+	examID				  varchar(10) not null,
+  	quantity              varchar(10) not null,
+  	startDate             date not null,
+  	endDate               date not null,
 	primary key (treatmentNumber, examID),
 	Foreign key(treatmentNumber) references treatment(treatmentNumber),
 	Foreign key (examID) references ExamDetails(examID)
