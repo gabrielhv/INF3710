@@ -5,7 +5,7 @@ create SCHEMA bd_schema;
 
 create table if not exists Clinic(
 	clinicID 			varchar(10) not null,
-	street				varchar(15) not null,
+	street				varchar(30) not null,
 	city 				  varchar(15) not null,
 	province			varchar(15) not null,
 	zipCode				varchar(15) not null,
@@ -15,18 +15,18 @@ create table if not exists Clinic(
 );
 
 create table if not exists Employee (
-	employeeID	            varchar(10) not null,
-	firstName             	varchar(10) not null,
-	lastName              	varchar(10) not null,
-	street	              	varchar(10) not null,
-	zipCode	              	varchar(10) not null,
-	city	                	varchar(10) not null,
-	province                varchar(10) not null,
-	jobfunction	            varchar(10) not null,
-	phoneNumber	            varchar(10) not null,
-	DOB			                varchar(10) not null,
+	employeeID	            varchar(20) not null,
+	firstName             	varchar(20) not null,
+	lastName              	varchar(20) not null,
+	street	              	varchar(20) not null,
+	zipCode	              	varchar(20) not null,
+	city	                	varchar(20) not null,
+	province                varchar(20) not null,
+	jobfunction	            varchar(20) not null,
+	phoneNumber	            varchar(20) not null,
+	DOB			                varchar(20) not null,
 	sex			                char check(sex ='M'OR sex='F') not null,
-	NAS			                varchar(9) not null,
+	NAS			                varchar(20) not null,
 	annualSalary	          numeric(8,2) not null,
 	clinicID              	varchar(10) not null,
 	primary key (employeeID),
@@ -34,14 +34,14 @@ create table if not exists Employee (
 );
 
 create table if not exists Owner(
-	ownerID		          varchar(10) not null,
-	ownername	          varchar(10) not null,
-	street		          varchar(10) not null,
-	zipCode		          varchar(10) not null,
-	province	          varchar(10) not null,
-	city		            varchar(10) not null,
-	phoneNumber	        varchar(9)  not null,
-	clinicID	          varchar(10) not null,
+	ownerID		          varchar(20) not null,
+	ownername	          varchar(20) not null,
+	street		          varchar(20) not null,
+	zipCode		          varchar(20) not null,
+	province	          varchar(20) not null,
+	city		            varchar(20) not null,
+	phoneNumber	        varchar(10)  not null,
+	clinicID	          varchar(20) not null,
 	primary key (ownerID),
 	Foreign key (clinicID) references Clinic(clinicID)
 );
@@ -61,8 +61,8 @@ create table if not exists Animal(
 create table if not exists examDetails (
 	examID		      varchar(10) not null,
 	examdate	      date not null,
-	examHour	      hour not null,
-	description	    varchar(10) not null,
+	examHour	      time not null,
+	description	    varchar(200) not null,
 	animalID	      varchar(10) not null,
 	vetID		        varchar(10) not null,
 	primary key(examID),
@@ -73,14 +73,14 @@ create table if not exists examDetails (
 create table if not exists treatment(
 	treatmentNumber		varchar(10) not null,
 	description			varchar(200) not null,
-	treatmentcost		varchar(10) not null,
+	treatmentcost		numeric(6,2) not null,
 	primary key (treatmentNumber)
 );
 
 create table if not exists treatmentDetails (
 	treatmentNumber	      varchar(10) not null, 
 	examID				  varchar(10) not null,
-  	quantity              varchar(10) not null,
+  	quantity              int,
   	startDate             date not null,
   	endDate               date not null,
 	primary key (treatmentNumber, examID),
