@@ -1,0 +1,32 @@
+Clinic (clinicID, street, city, province, zipCode, phoneNumber, faxNumber)
+Primary Key clinicID
+
+Employee (employeeID, firstName, LastName, street, zipCode, city, province, jobFunction, phoneNumber, DOB, sex, NAS, annualSalary, clinicID)
+Primary Key employeeID
+Alternate Key NAS
+Foreign Key clinicID references Clinic (clinicID)
+
+Owner (ownerID, ownerName, street, zipCode, province, city, phoneNumber, clinicID)
+Primary Key ownerID
+Foreign Key clinicID references Clinic (clinicID)
+
+Animal (animalID, animalName, animalType, description, inscriptionDate, animalState, ownerID)
+Primary Key animalID
+Foreign Key ownerID references Owner (ownerID)
+
+ExamDetails (examID, examDate, examHour, vetName, description, animalID, vetID)
+Primary Key examID
+Foreign Key animalID references Animal (animalID)
+Foreign Key vetID references Employee (employeeID)
+
+TreatmentRegimen (examID)
+Primary Key examID
+Foreign Key examID references ExamDetails (examID)
+
+Treatment (treatmentNumber, description, treatmentCost)
+Primary Key treatmentNumber
+
+TreatmentDetails (treatmentNumber, examID)
+Primary Key treatmentNumber, examID
+Foreign Key treatmentNumber references Treatment (treatmentNumber)
+Foreign Key examID references ExamDetails (examID)
