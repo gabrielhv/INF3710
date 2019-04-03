@@ -14,7 +14,7 @@ Animal (animalID, animalName, animalType, description, inscriptionDate, animalSt
 Primary Key animalID
 Foreign Key ownerID references Owner (ownerID)
 
-ExamDetails (examID, examDate, examHour, vetName, description, animalID, vetID)
+ExamDetails (examID, examDate, examHour, description, animalID, vetID)
 Primary Key examID
 Foreign Key animalID references Animal (animalID)
 Foreign Key vetID references Employee (employeeID)
@@ -23,7 +23,7 @@ Foreign Key vetID references Employee (employeeID)
 Treatment (treatmentNumber, description, treatmentCost)
 Primary Key treatmentNumber
 
-TreatmentDetails (treatmentNumber, examID, qunatity, startDate, endDate)
+TreatmentDetails (treatmentNumber, examID, quantity, startDate, endDate)
 Primary Key treatmentNumber, examID
 Foreign Key treatmentNumber references Treatment (treatmentNumber)
 Foreign Key examID references ExamDetails (examID)

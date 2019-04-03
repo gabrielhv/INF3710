@@ -1,0 +1,42 @@
+FD1:
+clinicID --> street, city, province, zipCode, phoneNumber, faxNumber
+
+FD2:
+employeeID --> firstName, LastName, street, zipCode, city, province, jobFunction, phoneNumber, DOB, sex, NAS, annualSalary, clinicID
+
+FD3:
+NAS --> employeeID, firstName, LastName, street, zipCode, city, province, jobFunction, phoneNumber, DOB, sex, annualSalary, clinicID
+
+FD4:
+ownerID --> ownerName, street, zipCode, province, city, phoneNumber, clinicID
+
+FD5:
+animalID --> animalName, animalType, description, inscriptionDate, animalState, ownerID
+
+FD6:
+examID --> examDate, examHour, description, animalID, vetID
+
+FD7:
+treatmentNumber --> description, treatmentCost
+
+FD8:
+treatmentNumber, examID --> quantity, startDate, endDate
+
+
+Notre base de données est de forme UNF puisque tous les éléments possèdent une clé
+primaire unique (et composée dans le cas de FD8). Nous avons décidé de ne pas garder
+le NAS comme clé primaire pour Employee (FD3).
+
+Notre base de données est aussi en 1NF parce que tous les attributs sont atomiques.
+C'est-à-dire que pour chaque attribut, une seule valeur est possible à la fois
+par entité.
+
+Notre BD est en 2NF, car chaque attribut qui n'est pas une clé primaire dépend
+fonctionnellement complètement de la clé primaire.
+
+À partir des clés primaires des relations 2NF, nous n'avons trouvé aucune dépendance
+transitive. Par exemple, nous avions le nom du vétérinnaire dans FD6, mais nous
+l'avons retiré puisqu'on avait déjà accès au vetID qui lui-même donne accès
+au nom. Nous avions donc déjà retiré la seule dépendance transitive avant de définir
+les dépendances fonctionnelles.
+
