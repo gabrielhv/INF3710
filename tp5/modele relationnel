@@ -19,14 +19,11 @@ Primary Key examID
 Foreign Key animalID references Animal (animalID)
 Foreign Key vetID references Employee (employeeID)
 
-TreatmentRegimen (examID)
-Primary Key examID
-Foreign Key examID references ExamDetails (examID)
 
 Treatment (treatmentNumber, description, treatmentCost)
 Primary Key treatmentNumber
 
-TreatmentDetails (treatmentNumber, examID)
+TreatmentDetails (treatmentNumber, examID, qunatity, startDate, endDate)
 Primary Key treatmentNumber, examID
 Foreign Key treatmentNumber references Treatment (treatmentNumber)
 Foreign Key examID references ExamDetails (examID)
