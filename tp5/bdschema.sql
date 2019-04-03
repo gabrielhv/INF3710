@@ -4,89 +4,92 @@ DROP SCHEMA IF EXISTS bd_schema CASCADE;
 create SCHEMA bd_schema;
 
 create table if not exists Clinic(
-	clinicID,
-	street,
-	city,
-	province,
-	zipCode,
-	phoneNumber,
-	faxNumber,
+	clinicID varchar(10),
+	street	varchar(15),
+	city 	varchar(15),
+	province	varchar(15),
+	zipCode		varchar(15),
+	phoneNumber	varchar(10),
+	faxNumber	varchar(10),
 	primary key (clinicID)
 );
 
-create table if not exists Employe (
-	employeID,
-	firstName,
-	lastName,
-	street,
-	zipCode,
-	city,
-	province,
-	jobfunction,
-	phoneNumber,
-	DOB,
-	sex,
-	NAS,
-	annualSalary,
-	clinicID,
-	primary key (employeID),
-	
+create table if not exists Employee (
+	employeeID	varchar(10),
+	firstName	varchar(10),
+	lastName	varchar(10),
+	street		varchar(10),
+	zipCode		varchar(10),
+	city		varchar(10),
+	province	varchar(10),
+	jobfunction	varchar(10),
+	phoneNumber	varchar(10),
+	DOB			varchar(10),
+	sex			char check(sex ='M'OR sex='F'),
+	NAS			varchar(9),
+	annualSalary	numeric(8,2),
+	clinicID	varchar(10),
+	primary key (employeeID),
+	Foreign key(clinicID) references clinic(clinicID)
 );
 
 create table if not exists Owner(
-	ownerID,
-	ownername,
-	street,
-	zipCode,
-	province,
-	city,
-	phoneNumber,
-	clinicID,
-	primary key (ownerID)
+	ownerID		varchar(10),
+	ownername	varchar(10),
+	street		varchar(10),
+	zipCode		varchar(10),
+	province	varchar(10),
+	city		varchar(10),
+	phoneNumber	varchar(9),
+	clinicID	varchar(10),
+	primary key (ownerID),
+	Foreign key (clinicID) references Clinic(clinicID)
 );
 
-create table if not exists Animal(
-	animalID,
-	animalName,
-	animalType,
-	description,
-	inscriptionDate,
-	animalstate,
-	ownerID,
-	primary key (animalID)
-	Foreign key (owniderID) references Owner(ownerID)
+create table if not exists Animal(	
+	animalID	varchar(10),
+	animalName	varchar(10),
+	animalType	varchar(10),
+	description	varchar(200),
+	inscriptionDate	varchar(10),
+	animalstate	varchar(10),
+	ownerID		varchar(10),
+	primary key (animalID),
+	Foreign key (ownerID) references Owner(ownerID)
 );
 
 create table if not exists examDetails (
-	examID,
-	examdate,
-	examHour,
-	vetName,
-	description,
-	animalID,
-	vetID,
-	primary key(examID)
-	Foreign key (animalID) references Animal(animalID)
+	examID		varchar(10),
+	examdate	varchar(10),
+	examHour	varchar(10),
+	vetName		varchar(10),
+	description	varchar(10),
+	animalID	varchar(10),
+	vetID		varchar(10),
+	primary key(examID),
+	Foreign key (animalID) references Animal(animalID),
+	Foreign key (vetID) references Employee (EmployeeID)
 );
 
 create table if not exists treatementRegimen (
-	examID,
+	examID		varchar(10),
 	primary key(examID),
 	Foreign key(examID) references examDetails (examID)
 );
 
 create table if not exists treatment(
-	treatmentNumber,
-	description,
-	treatmentcost,
+	treatmentNumber		varchar(10),
+	description			varchar(200),
+	treatmentcost		varchar(10),
+	primary key (treatmentNumber)
 );
 
 create table if not exists treatmentDetails (
-	treatmentNumber, 
-	examID,
+	treatmentNumber		varchar(10), 
+	examID				varchar(10),
 	primary key (treatmentNumber, examID),
-	Foreign key(treatmentNumber) references Treatment(treatNumber),
-	Foreign key (exammID) references ExamDetails(examID)
+	Foreign key(treatmentNumber) references treatment(treatmentNumber),
+	Foreign key (examID) references ExamDetails(examID)
 );
 
 
