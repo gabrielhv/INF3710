@@ -86,55 +86,18 @@ WHERE an.animalType = 'Cat' AND an.ownerID = o.ownerID AND o.ownerID NOT IN
 	   );
 	   
 --requete 15) Lister tous les animaux d’une clinique donnée avec leurs traitements s’ils existent. Dans le cas contraire, affichez null
-SELECT T1.*, tre.*
+SELECT o.clinicID, T2.*
+FROM owner o
+	   INNER JOIN
+(SELECT T1.*, tre.*
 FROM (
 	SELECT an.*, ex.*
 	FROM animal an LEFT JOIN examDetails ex
 	USING (animalID)) as T1
 LEFT OUTER JOIN treatmentDetails tre
-USING (examID)
-ORDER BY T1.animalID;
-	 
-	   WHERE (ex.animalID = an.animalID)  
-	  
-	   (SELECT tr.*, ex.animalID
-	   FROM treatmentDetails tr, examDetails ex
-	   WHERE ex.examID = tr.examID);
-	   
-	   
-create table if not exists treatmentDetails (
-	treatmentNumber	      varchar(10) not null, 
-	examID				  varchar(10) not null,
-  	quantity              int,
-  	startDate             date not null,
-  	endDate               date not null,
-	primary key (treatmentNumber, examID),
-	Foreign key(treatmentNumber) references treatment(treatmentNumber),
-	Foreign key (examID) references ExamDetails(examID)
-);
-	   
-	   create table if not exists examDetails (
-	examID		      varchar(10) not null,
-	examdate	      date not null,
-	examHour	      time not null,
-	description	    varchar(200) not null,
-	animalID	      varchar(10) not null,
-	vetID		        varchar(10) not null,
-	primary key(examID),
-	Foreign key (animalID) references Animal(animalID),
-	Foreign key (vetID) references Employee (EmployeeID)
-);
+USING (examID)) as T2
 
-	   
-create table if not exists Animal(	
-	animalID	        varchar(10) not null,
-	animalName	      varchar(10) not null,
-	animalType	      varchar(10) not null,
-	description	      varchar(200) not null,
-	inscriptionDate	  varchar(10) not null,
-	animalstate	      varchar(10) not null,
-	ownerID		        varchar(10) not null,
-	primary key (animalID),
-	Foreign key (ownerID) references Owner(ownerID)
-);
-	   
+ON (o.ownerID = T2.ownerID)
+WHERE(o.clinicID = 'C100');
+		   
+		   
