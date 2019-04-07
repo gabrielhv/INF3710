@@ -40,11 +40,13 @@ VALUES ('A410', 'Firefox', 'Dog', 'orange and soft', DATE'2016-08-23', 'alive', 
 insert into bd_schema.Animal(animalID, animalName, animalType, description, inscriptionDate, animalstate, ownerID)
 VALUES ('A420', 'Doggo', 'Dog', 'fluffy and cuddlely', DATE'2014-10-09', 'alive', 'O301');
 insert into bd_schema.Animal(animalID, animalName, animalType, description, inscriptionDate, animalstate, ownerID)
-VALUES ('A430', 'Big Pupper', 'Dog', 'very large', DATE'2012-04-26', 'alive', 'O302');
+VALUES ('A430', 'Big Pupper', 'Dog', 'very large', DATE'2012-04-26', 'alive', 'O301');
 insert into bd_schema.Animal(animalID, animalName, animalType, description, inscriptionDate, animalstate, ownerID)
 VALUES ('A401', 'Gluant', 'Snake', 'fat and missing a tooth', DATE'2014-07-13', 'sick', 'O300');
 insert into bd_schema.Animal(animalID, animalName, animalType, description, inscriptionDate, animalstate, ownerID)
 VALUES ('A402', 'Rejean', 'cat', 'a little boney', DATE'2001-07-13', 'dead', 'O301');
+insert into bd_schema.Animal(animalID, animalName, animalType, description, inscriptionDate, animalstate, ownerID)
+VALUES ('A442', 'PussyCat', 'cat', 'smooth criminal', DATE'2009-11-17', 'alive', 'O302');
 insert into bd_schema.Animal(animalID, animalName, animalType, description, inscriptionDate, animalstate, ownerID)
 VALUES ('A403', 'Neigh', 'horse', 'stubborn and eats a lot', DATE'2012-07-13', 'alive', 'O302');
 
