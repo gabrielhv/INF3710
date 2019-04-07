@@ -16,7 +16,7 @@ VALUES ('E1', 'Bob', 'Ross', 'Victoria street', 'A2B 2C2', 'Montreal', 'QC', 'Ve
 insert into bd_schema.Employee(employeeID, firstName, lastName, street, zipCode, city, province, jobfunction, phoneNumber, DOB, sex, NAS, annualSalary, clinicID)
 VALUES ('E2', 'Simone', 'Guay', 'Saint Aladin street', 'C4D 2A2', 'Montreal', 'QC', 'Manager', '5149993333', DATE'1976-07-13', 'F', '111444333', 155000.00, 'C101');
 insert into bd_schema.Employee(employeeID, firstName, lastName, street, zipCode, city, province, jobfunction, phoneNumber, DOB, sex, NAS, annualSalary, clinicID)
-VALUES ('E3', 'Albert', 'Einsten', 'Poof street', 'A2V 2B2', 'Montreal', 'QC', 'Veterinarian', '5143338987', DATE'1985-07-13', 'M', '787222444', 75000.12, 'C101');
+VALUES ('E3', 'Jean', 'Tremblay', 'Poof street', 'A2V 2B2', 'Montreal', 'QC', 'Veterinarian', '5143338987', DATE'1985-07-13', 'M', '787222444', 75000.12, 'C101');
 insert into bd_schema.Employee(employeeID, firstName, lastName, street, zipCode, city, province, jobfunction, phoneNumber, DOB, sex, NAS, annualSalary, clinicID)
 VALUES ('E4', 'Bruce', 'Willis', 'Paff street', 'A2F 5B7', 'Montreal', 'QC', 'Veterinarian', '5144531289', DATE'1990-07-13', 'M', '787543494', 55000.00, 'C101');
 
@@ -29,7 +29,7 @@ VALUES ('E6', 'Bobette', 'Rosselle', 'King street', 'N0M 2C6', 'Toronto', 'ON', 
 insert into bd_schema.Owner(ownerID, ownername, street, zipCode, province, city, phoneNumber, clinicID)
 VALUES ('O300', 'John Lajoie', 'Queen street', 'J1J 1J1', 'QC', 'Montreal', '5142223334', 'C100');
 insert into bd_schema.Owner(ownerID, ownername, street, zipCode, province, city, phoneNumber, clinicID)
-VALUES ('O301', 'Bob Jonhson', 'Apple street', 'K3K 3K3', 'QC', 'Longueuil', '5145556667', 'C101');
+VALUES ('O301', 'Bob Jonhblayson', 'Apple street', 'K3K 3K3', 'QC', 'Longueuil', '5145556667', 'C101');
 insert into bd_schema.Owner(ownerID, ownername, street, zipCode, province, city, phoneNumber, clinicID)
 VALUES ('O302', 'Henri Sanson', 'GottaGoFast street', 'A2B 3C4', 'ON', 'Toronto', '8272223333', 'C102');
 

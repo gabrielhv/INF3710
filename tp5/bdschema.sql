@@ -24,7 +24,7 @@ create table if not exists Employee (
 	province                varchar(20) not null,
 	jobfunction	            varchar(20) not null,
 	phoneNumber	            varchar(20) not null,
-	DOB			                varchar(20) not null,
+	DOB			                DATE not null,
 	sex			                char check(sex ='M'OR sex='F') not null,
 	NAS			                varchar(20) not null,
 	annualSalary	          numeric(8,2) not null,
