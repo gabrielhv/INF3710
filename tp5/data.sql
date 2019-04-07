@@ -34,13 +34,19 @@ insert into bd_schema.Owner(ownerID, ownername, street, zipCode, province, city,
 VALUES ('O302', 'Henri Sanson', 'GottaGoFast street', 'A2B 3C4', 'ON', 'Toronto', '8272223333', 'C102');
 
 insert into bd_schema.Animal(animalID, animalName, animalType, description, inscriptionDate, animalstate, ownerID)
-VALUES ('A400', 'Snowflake', 'Dog', 'fat and very hairy', DATE'2015-07-13', 'vivant', 'O300');
+VALUES ('A400', 'Snowflake', 'Dog', 'fat and very hairy', DATE'2015-07-13', 'alive', 'O300');
 insert into bd_schema.Animal(animalID, animalName, animalType, description, inscriptionDate, animalstate, ownerID)
-VALUES ('A401', 'Gluant', 'Snake', 'fat and missing a tooth', DATE'2014-07-13', 'malade', 'O300');
+VALUES ('A410', 'Firefox', 'Dog', 'orange and soft', DATE'2016-08-23', 'alive', 'O300');
 insert into bd_schema.Animal(animalID, animalName, animalType, description, inscriptionDate, animalstate, ownerID)
-VALUES ('A402', 'Rejean', 'cat', 'a little boney', DATE'2001-07-13', 'mort', 'O301');
+VALUES ('A420', 'Doggo', 'Dog', 'fluffy and cuddlely', DATE'2014-10-09', 'alive', 'O301');
 insert into bd_schema.Animal(animalID, animalName, animalType, description, inscriptionDate, animalstate, ownerID)
-VALUES ('A403', 'Neigh', 'horse', 'stubborn and eats a lot', DATE'2012-07-13', 'vivant', 'O302');
+VALUES ('A430', 'Big Pupper', 'Dog', 'very large', DATE'2012-04-26', 'alive', 'O302');
+insert into bd_schema.Animal(animalID, animalName, animalType, description, inscriptionDate, animalstate, ownerID)
+VALUES ('A401', 'Gluant', 'Snake', 'fat and missing a tooth', DATE'2014-07-13', 'sick', 'O300');
+insert into bd_schema.Animal(animalID, animalName, animalType, description, inscriptionDate, animalstate, ownerID)
+VALUES ('A402', 'Rejean', 'cat', 'a little boney', DATE'2001-07-13', 'dead', 'O301');
+insert into bd_schema.Animal(animalID, animalName, animalType, description, inscriptionDate, animalstate, ownerID)
+VALUES ('A403', 'Neigh', 'horse', 'stubborn and eats a lot', DATE'2012-07-13', 'alive', 'O302');
 
 insert into bd_schema.examDetails(examID, examDate, examHour, description, animalID, vetID)
 VALUES ('EX500', DATE'2019-04-01', '13:25:00', 'complete exam', 'A400', 'E1');
