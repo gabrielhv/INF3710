@@ -32,6 +32,8 @@ insert into bd_schema.Owner(ownerID, ownername, street, zipCode, province, city,
 VALUES ('O301', 'Bob Jonhblayson', 'Apple street', 'K3K 3K3', 'QC', 'Longueuil', '5145556667', 'C101');
 insert into bd_schema.Owner(ownerID, ownername, street, zipCode, province, city, phoneNumber, clinicID)
 VALUES ('O302', 'Henri Sanson', 'GottaGoFast street', 'A2B 3C4', 'ON', 'Toronto', '8272223333', 'C102');
+insert into bd_schema.Owner(ownerID, ownername, street, zipCode, province, city, phoneNumber, clinicID)
+VALUES ('O303', 'Bill Cosby', 'SleepWell street', 'K6E 9D2', 'ON', 'Toronto', '8278529874', 'C102');
 
 insert into bd_schema.Animal(animalID, animalName, animalType, description, inscriptionDate, animalstate, ownerID)
 VALUES ('A400', 'Snowflake', 'Dog', 'fat and very hairy', DATE'2015-07-13', 'alive', 'O300');
@@ -44,11 +46,16 @@ VALUES ('A430', 'Big Pupper', 'Dog', 'very large', DATE'2012-04-26', 'alive', 'O
 insert into bd_schema.Animal(animalID, animalName, animalType, description, inscriptionDate, animalstate, ownerID)
 VALUES ('A401', 'Gluant', 'Snake', 'fat and missing a tooth', DATE'2014-07-13', 'sick', 'O300');
 insert into bd_schema.Animal(animalID, animalName, animalType, description, inscriptionDate, animalstate, ownerID)
-VALUES ('A402', 'Rejean', 'cat', 'a little boney', DATE'2001-07-13', 'dead', 'O301');
+VALUES ('A402', 'Rejean', 'Cat', 'a little boney', DATE'2001-07-13', 'dead', 'O301');
 insert into bd_schema.Animal(animalID, animalName, animalType, description, inscriptionDate, animalstate, ownerID)
-VALUES ('A442', 'PussyCat', 'cat', 'smooth criminal', DATE'2009-11-17', 'alive', 'O302');
+VALUES ('A442', 'PussyCat', 'Cat', 'smooth criminal', DATE'2009-11-17', 'alive', 'O302');
 insert into bd_schema.Animal(animalID, animalName, animalType, description, inscriptionDate, animalstate, ownerID)
-VALUES ('A403', 'Neigh', 'horse', 'stubborn and eats a lot', DATE'2012-07-13', 'alive', 'O302');
+VALUES ('A403', 'Neigh', 'Horse', 'stubborn and eats a lot', DATE'2012-07-13', 'alive', 'O302');
+insert into bd_schema.Animal(animalID, animalName, animalType, description, inscriptionDate, animalstate, ownerID)
+VALUES ('A461', 'Valium', 'Cat', 'Sleeps a lot', DATE'2016-07-13', 'alive', 'O303');
+insert into bd_schema.Animal(animalID, animalName, animalType, description, inscriptionDate, animalstate, ownerID)
+VALUES ('A409', 'Chloroform', 'Dog', 'eats a lot, vaccinated against the flu, sleeps a lot', DATE'2014-07-13', 'alive', 'O303');
+
 
 insert into bd_schema.examDetails(examID, examDate, examHour, description, animalID, vetID)
 VALUES ('EX500', DATE'2019-04-01', '13:25:00', 'complete exam', 'A400', 'E1');
@@ -65,15 +72,4 @@ VALUES ('T112', 'Cold Vaccination', 70.00);
 insert into bd_schema.treatmentDetails(treatmentNumber, examID, quantity, startDate, endDate)
 VALUES ('T100', 'EX500', 5, DATE'2019-04-01', DATE'2019-04-6');
 
-
--- create table if not exists treatmentDetails (
--- 	treatmentNumber	      varchar(10) not null, 
--- 	examID				  varchar(10) not null,
---   	quantity              varchar(10) not null,
---   	startDate             date not null,
---   	endDate               date not null,
--- 	primary key (treatmentNumber, examID),
--- 	Foreign key(treatmentNumber) references treatment(treatmentNumber),
--- 	Foreign key (examID) references ExamDetails(examID)
--- );
 

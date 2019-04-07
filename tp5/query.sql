@@ -49,9 +49,9 @@ FROM treatment
 SELECT firstName, lastName
 FROM Employee e
 WHERE e.employeeID IN 
-	(SELECT em.employeeID
-	 FROM Employee em
-	 WHERE (DATE_PART('year', current_date) - DATE_PART('year', em.DOB)) > 50);
+(SELECT em.employeeID
+FROM Employee em
+WHERE (DATE_PART('year', current_date) - DATE_PART('year', em.DOB)) > 50);
 
 -- requete 10) Quels sont les propriétaires dont le nom contient « blay » ?
 SELECT *
@@ -62,3 +62,79 @@ WHERE LOWER(o.ownername) LIKE '%blay%'
 DELETE FROM Employee
 WHERE Employee.firstName = 'Jean' AND Employee.lastName = 'Tremblay';
 			
+-- requete 12) Lister les détails des propriétaires qui ont un chat et un chien
+SELECT o.*
+FROM Owner o, Animal an
+WHERE LOWER(an.animalType) = 'cat' AND an.ownerID = o.ownerID AND an.ownerID IN
+	   (SELECT ow.ownerID
+	   FROM owner ow, animal a
+	   WHERE LOWER(a.animalType) = 'dog' AND a.ownerID = ow.ownerID); 
+
+	   
+-- requete 13) Lister les détails des propriétaires qui ont un chat ou un chien
+SELECT DISTINCT o.*
+FROM owner o, animal an
+WHERE an.ownerID = o.ownerID AND (an.animalType = 'Cat' OR an.animalType = 'Dog');
+	   
+-- requete 14) Lister les détails des propriétaires qui ont un chat mais pas de chien vacciné contre la grippe (la condition vacciné contre la grippe ne s’applique qu’aux chiens)
+SELECT DISTINCT o.*
+FROM owner o, animal an
+WHERE an.animalType = 'Cat' AND an.ownerID = o.ownerID AND o.ownerID NOT IN 
+	   (SELECT ow.ownerID
+		FROM owner ow, animal a
+		WHERE a.animalType = 'Dog' AND a.ownerID = ow.ownerID AND LOWER(a.description) LIKE '%vaccinated against the flu%'
+	   );
+	   
+--requete 15) Lister tous les animaux d’une clinique donnée avec leurs traitements s’ils existent. Dans le cas contraire, affichez null
+SELECT T1.*, tre.*
+FROM (
+	SELECT an.*, ex.*
+	FROM animal an LEFT JOIN examDetails ex
+	USING (animalID)) as T1
+LEFT OUTER JOIN treatmentDetails tre
+USING (examID)
+ORDER BY T1.animalID;
+	 
+	   WHERE (ex.animalID = an.animalID)  
+	  
+	   (SELECT tr.*, ex.animalID
+	   FROM treatmentDetails tr, examDetails ex
+	   WHERE ex.examID = tr.examID);
+	   
+	   
+create table if not exists treatmentDetails (
+	treatmentNumber	      varchar(10) not null, 
+	examID				  varchar(10) not null,
+  	quantity              int,
+  	startDate             date not null,
+  	endDate               date not null,
+	primary key (treatmentNumber, examID),
+	Foreign key(treatmentNumber) references treatment(treatmentNumber),
+	Foreign key (examID) references ExamDetails(examID)
+);
+	   
+	   create table if not exists examDetails (
+	examID		      varchar(10) not null,
+	examdate	      date not null,
+	examHour	      time not null,
+	description	    varchar(200) not null,
+	animalID	      varchar(10) not null,
+	vetID		        varchar(10) not null,
+	primary key(examID),
+	Foreign key (animalID) references Animal(animalID),
+	Foreign key (vetID) references Employee (EmployeeID)
+);
+
+	   
+create table if not exists Animal(	
+	animalID	        varchar(10) not null,
+	animalName	      varchar(10) not null,
+	animalType	      varchar(10) not null,
+	description	      varchar(200) not null,
+	inscriptionDate	  varchar(10) not null,
+	animalstate	      varchar(10) not null,
+	ownerID		        varchar(10) not null,
+	primary key (animalID),
+	Foreign key (ownerID) references Owner(ownerID)
+);
+	   
