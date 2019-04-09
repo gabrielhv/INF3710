@@ -1,4 +1,4 @@
-SET search_path = hotelDB;
+SET search_path = HOTELDB;
 
 
 
@@ -31,13 +31,13 @@ UPDATE HOTELDB.Guest set guestName = 'Alexandra L.' where guestNo='G112';
 
 -- Quelle différence entre les deux delete ?
 
-DELETE  from HOTELDB.HOTEL where hotelNo='H111';
-DELETE  from HOTELDB.HOTEL where hotelNo='H113';
+-- DELETE  from HOTELDB.HOTEL where hotelNo='H111';
+-- DELETE  from HOTELDB.HOTEL where hotelNo='H113';
 
 -- Que se passe-t- il avec la requête suivante ? Le deuxieme fonctionne car il n'existe pas de room dans le hotel h113, tandis que dans le hotel 
 -- h111, il y a des room, alors il y aura des contraintes de on delete constraint empechant le delete
  
-DELETE  from GUEST where guestNo='G111';
+-- DELETE  from GUEST where guestNo='G111';
 
 -- Le probleme avec cette requete est que le guest est supprime avec succes. Toutefois, il est encore reference dans la table booking
 -- qui contient une contrainte not null. 

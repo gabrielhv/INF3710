@@ -10,11 +10,11 @@ export class DatabaseService {
 
     // A MODIFIER POUR VOTRE BD
     public connectionConfig: pg.ConnectionConfig = {
-        user: "postgres",
-        database: "University",
+        user: "normal_user",
+        database: "postgres",
         password: "admin",
         port: 5432,
-        host: "127.0.0.1",
+        host: "localhost",
         keepAlive : true
     };
 
