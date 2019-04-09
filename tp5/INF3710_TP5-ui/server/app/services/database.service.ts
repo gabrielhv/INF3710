@@ -1,9 +1,9 @@
 import { injectable } from "inversify";
 import * as pg from "pg";
 import "reflect-metadata";
-import {schema} from "../createSchema";
-import {data} from "../populateDB";
 import { Room } from "../../../common/tables/Room";
+import {schema} from "../createSchema";
+import {data} from "../populateDB_VSF";
 
 @injectable()
 export class DatabaseService {
@@ -11,7 +11,7 @@ export class DatabaseService {
     // A MODIFIER POUR VOTRE BD
     public connectionConfig: pg.ConnectionConfig = {
         user: "normal_user",
-        database: "postgres",
+        database: "VetoSansFrontieresDB",
         password: "admin",
         port: 5432,
         host: "localhost",
@@ -20,33 +20,67 @@ export class DatabaseService {
 
     private pool: pg.Pool = new pg.Pool(this.connectionConfig);
 
+
+/* fonctions propres a VetoSansFrontieres */
+
+public createSchema(): Promise<pg.QueryResult> {
+    this.pool.connect();
+
+    return this.pool.query(schema);
+}
+
+    public populateDb(): Promise<pg.QueryResult> {
+    this.pool.connect();
+
+    return this.pool.query(data);
+}
+
+public getAllFromTable(tableName: string): Promise<pg.QueryResult> {
+    this.pool.connect();
+
+    return this.pool.query(`SELECT * FROM VetoSansFrontieresDB.${tableName};`);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     /*
 
         METHODES DE DEBUG
     */
-    public createSchema(): Promise<pg.QueryResult> {
-        this.pool.connect();
-        
-        return this.pool.query(schema);
-    }
+    // public createSchema(): Promise<pg.QueryResult> {
+    //     this.pool.connect();
 
-    public populateDb(): Promise<pg.QueryResult> {
-        this.pool.connect();
+    //     return this.pool.query(schema);
+    // }
 
-        return this.pool.query(data);
-    }
+    // public populateDb(): Promise<pg.QueryResult> {
+    //     this.pool.connect();
 
-    public getAllFromTable(tableName: string): Promise<pg.QueryResult> {
-        this.pool.connect();
+    //     return this.pool.query(data);
+    // }
 
-        return this.pool.query(`SELECT * FROM HOTELDB.${tableName};`);
-    }
+    // public getAllFromTable(tableName: string): Promise<pg.QueryResult> {
+    //     this.pool.connect();
+
+    //     return this.pool.query(`SELECT * FROM HOTELDB.${tableName};`);
+    // }
 
     // HOTEL
     public getHotels(): Promise<pg.QueryResult> {
         this.pool.connect();
 
-        return this.pool.query('SELECT * FROM HOTELDB.Hotel;');
+        return this.pool.query('SELECT * FROM VetoSansFrontieresDB.Clinic;');
     }
 
     public getHotelNo(): Promise<pg.QueryResult> {
@@ -164,4 +198,7 @@ export class DatabaseService {
 
         return this.pool.query(queryText, values);
         }
+
+
+
 }
