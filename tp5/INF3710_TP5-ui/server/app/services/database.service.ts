@@ -70,7 +70,7 @@ export class DatabaseService {
         animalID,
         ownerID,
     ];
-    const queryText: string = `DELETE FROM VetoSansFrontieresDB.animal WHERE VetoSansFrontieresDB.animal.animalID = VALUES($1) AND ownerID = VALUES($2)`;
+    const queryText: string = `DELETE FROM VetoSansFrontieresDB.animal WHERE VetoSansFrontieresDB.animal.animalID = VALUES($1) AND ownerID = VALUES($2);`;
     return this.pool.query(queryText, values);
     }
 
@@ -86,7 +86,7 @@ export class DatabaseService {
             animalState,
             ownerID,
         ];
-        const queryText: string = `UPDATE VetoSansFrontieresDB.animal SET animalName = VALUES($2), animalType = VALUES($3), description = VALUES($4), inscriptionDate = VALUES($5), animalState = VALUES($6)`;
+        const queryText: string = `UPDATE VetoSansFrontieresDB.animal SET animalName = VALUES($2), animalType = VALUES($3), description = VALUES($4), inscriptionDate = VALUES($5), animalState = VALUES($6);`;
         return this.pool.query(queryText, values);
     }
 
@@ -94,14 +94,6 @@ export class DatabaseService {
 
 
 
-
-
-
-
-
-
-
-    
     /*
 
         METHODES DE DEBUG
@@ -169,7 +161,7 @@ export class DatabaseService {
         return this.pool.query(query);
     }
 
-    
+
     public getRoomFromHotelParams(params: object): Promise<pg.QueryResult> {
         this.pool.connect();
 
