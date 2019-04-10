@@ -20,10 +20,9 @@ export class DatabaseService {
 
     private pool: pg.Pool = new pg.Pool(this.connectionConfig);
 
-
 /* fonctions propres a VetoSansFrontieres */
 
-public createSchema(): Promise<pg.QueryResult> {
+    public createSchema(): Promise<pg.QueryResult> {
     this.pool.connect();
 
     return this.pool.query(schema);
@@ -35,12 +34,61 @@ public createSchema(): Promise<pg.QueryResult> {
     return this.pool.query(data);
 }
 
-public getAllFromTable(tableName: string): Promise<pg.QueryResult> {
+    public getAllFromTable(tableName: string): Promise<pg.QueryResult> {
     this.pool.connect();
 
     return this.pool.query(`SELECT * FROM VetoSansFrontieresDB.${tableName};`);
 }
 
+    public getAnimals(): Promise<pg.QueryResult> {
+    this.pool.connect();
+
+    return this.pool.query('SELECT * FROM VetoSansFrontieresDB.animal;');
+}
+
+// animalID, animalName, animalType, description, inscriptionDate, animalState, ownerID
+// tslint:disable-next-line: max-line-length
+    public createAnimal(animalID: string, animalName: string, animalType: string, description: string, inscriptionDate: string, animalState: string, ownerID: string): Promise<pg.QueryResult> {
+    this.pool.connect();
+    const values: string[] = [
+        animalID,
+        animalName,
+        animalType,
+        description,
+        inscriptionDate,
+        animalState,
+        ownerID,
+    ];
+    const queryText: string = `INSERT INTO VetoSansFrontieresDB.animal VALUES($1, $2, $3, $4, $5, $6, $7);`;
+
+    return this.pool.query(queryText, values);
+}
+    public deleteAnimal(animalID: string, ownerID: string): Promise<pg.QueryResult> {
+// tslint:disable-next-line: no-floating-promises
+    this.pool.connect();
+    const values: string[] = [
+        animalID,
+        ownerID,
+    ];
+    const queryText: string = `DELETE FROM VetoSansFrontieresDB.animal WHERE VetoSansFrontieresDB.animal.animalID = VALUES($1) AND ownerID = VALUES($2)`;
+    return this.pool.query(queryText, values);
+    }
+
+    public UpdateAnimal(animalID: string, animalName: string, animalType: string, description: string, inscriptionDate: string, animalState: string, ownerID: string): Promise<pg.QueryResult> {
+// tslint:disable-next-line: no-floating-promises
+        this.pool.connect();
+        const values: string[] = [
+            animalID,
+            animalName,
+            animalType,
+            description,
+            inscriptionDate,
+            animalState,
+            ownerID,
+        ];
+        const queryText: string = `UPDATE VetoSansFrontieresDB.animal SET animalName = VALUES($2), animalType = VALUES($3), description = VALUES($4), inscriptionDate = VALUES($5), animalState = VALUES($6)`;
+        return this.pool.query(queryText, values);
+    }
 
 
 
@@ -53,7 +101,7 @@ public getAllFromTable(tableName: string): Promise<pg.QueryResult> {
 
 
 
-
+    
     /*
 
         METHODES DE DEBUG
@@ -77,11 +125,11 @@ public getAllFromTable(tableName: string): Promise<pg.QueryResult> {
     // }
 
     // HOTEL
-    public getHotels(): Promise<pg.QueryResult> {
-        this.pool.connect();
+    // public getHotels(): Promise<pg.QueryResult> {
+    //     this.pool.connect();
 
-        return this.pool.query('SELECT * FROM VetoSansFrontieresDB.Clinic;');
-    }
+    //     return this.pool.query('SELECT * FROM HOTELDB.HOTEL;');
+    // }
 
     public getHotelNo(): Promise<pg.QueryResult> {
         this.pool.connect();
@@ -121,6 +169,7 @@ public getAllFromTable(tableName: string): Promise<pg.QueryResult> {
         return this.pool.query(query);
     }
 
+    
     public getRoomFromHotelParams(params: object): Promise<pg.QueryResult> {
         this.pool.connect();
 
@@ -198,7 +247,5 @@ public getAllFromTable(tableName: string): Promise<pg.QueryResult> {
 
         return this.pool.query(queryText, values);
         }
-
-
 
 }
