@@ -227,6 +227,18 @@ export class DatabaseController {
                 });
         });
 
+        router.get("/animalNamesSuggestions",
+                   (req: Request, res: Response, next: NextFunction) => {
+            const searchEntry: string = req.body;
+         // Send the request to the service and send the response
+            this.databaseService.GetAnimalNamesFromSearchEntry(searchEntry).then((result: pg.QueryResult) => {
+             const animalNames: string[] = result.rows.map((row: any) => row.animalName);
+             res.json(animalNames);
+           }).catch((e: Error) => {
+         console.error(e.stack);
+            });
+        });
+
         return router;
     }
 }
