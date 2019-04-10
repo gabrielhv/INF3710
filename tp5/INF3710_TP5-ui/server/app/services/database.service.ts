@@ -90,6 +90,11 @@ export class DatabaseService {
         return this.pool.query(queryText, values);
     }
 
+    public getOwnersID(): Promise<pg.QueryResult> {
+        this.pool.connect();
+        const queryText: string = `SELECT ownerID FROM VetoSansFrontieres.owner;`;
+        return this.pool.query(queryText);
+    }
 
 
 
