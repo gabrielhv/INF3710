@@ -96,6 +96,13 @@ export class DatabaseService {
         return this.pool.query(queryText);
     }
 
+    //pour les suggestions de la search bar
+    public GetAnimalNamesFromSearchEntry(searchEntry: string): Promise<pg.QueryResult>{
+        this.pool.connect();
+// tslint:disable-next-line: max-line-length
+        const queryText: string = "SELECT a.animalName FROM VetoSansFrontieresDB.animal a WHERE LOWER(a.animalName) LIKE LOWER'%" + searchEntry + "%';";
+        return this.pool.query(queryText);
+    }
 
 
 
