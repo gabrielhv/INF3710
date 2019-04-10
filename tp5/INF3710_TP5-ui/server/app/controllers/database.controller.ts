@@ -124,6 +124,25 @@ export class DatabaseController {
                     });
             });
 
+        router.get("/animals",
+                   (req: Request, res: Response, next: NextFunction) => {
+            this.databaseService.getAnimals()
+                .then((result: pg.QueryResult) => {
+                    const animals: Animal[] = result.rows.map((a: any) => (
+                    {
+                    animalID : a.animalID,
+                    animalName: a.animalNAme,
+                    animalType: a.animalType,
+                    description: a.description,
+                    inscriptionDate: a.inscriptionDate,
+                    animalState: a.animalState,
+                    ownerID: a.ownerID
+                    }));
+                    res.json(animals);
+                    }).catch((e: Error) => {
+                    console.error(e.stack);
+                });
+        });
         return router;
     }
 }
