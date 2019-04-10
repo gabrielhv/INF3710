@@ -143,6 +143,25 @@ export class DatabaseController {
                     console.error(e.stack);
                 });
         });
+
+        router.post("/animal/insert",
+// tslint:disable-next-line: max-func-body-length
+                    (req: Request, res: Response, next: NextFunction) => {
+                const animalID: string = req.body.animalID;
+                const animalName: string = req.body.animalName;
+                const animalType: string = req.body.animalType;
+                const description: string = req.body.description;
+                const inscriptionDate: string = req.body.inscriptionDate;
+                const animalState: string = req.body.animalState;
+                const ownerID: string = req.body.ownerID;
+// tslint:disable-next-line: max-line-length
+                this.databaseService.createAnimal(animalID, animalName, animalType, description, inscriptionDate, animalState, ownerID).then((result: pg.QueryResult) => {
+                res.json(result.rowCount);
+            }).catch((e: Error) => {
+                console.error(e.stack);
+                res.json(-1);
+            });
+});
         return router;
     }
 }
