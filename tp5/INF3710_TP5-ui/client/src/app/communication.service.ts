@@ -43,6 +43,12 @@ export class CommunicationService {
         );
     }
 
+    public insertAnimal(animal: any): Observable<number> {
+        return this.http.post<number>(this.BASE_URL + "/hotel/insert", animal).pipe(
+            catchError(this.handleError<number>("insertAnimal")),
+        );
+    }
+
     public insertRoom(room: Room): Observable<number> {
         return this.http.post<number>(this.BASE_URL + "/rooms/insert", room).pipe(
             catchError(this.handleError<number>("inserHotel")),
