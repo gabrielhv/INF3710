@@ -216,6 +216,17 @@ export class DatabaseController {
             res.json(-1);
         });
     });
+        router.get("/owners",
+                   (req: Request, res: Response, next: NextFunction) => {
+                    // Send the request to the service and send the response
+                    this.databaseService.getOwnersID().then((result: pg.QueryResult) => {
+                        const ownersID: string[] = result.rows.map((row: any) => row.ownerID);
+                        res.json(ownersID);
+                      }).catch((e: Error) => {
+                    console.error(e.stack);
+                });
+        });
+
         return router;
     }
 }
