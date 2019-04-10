@@ -5,6 +5,6 @@ export interface Animal {
     "animalType": string;
     "description": string;
     "inscriptionDate": string;
-    "animalstate": string;
+    "animalState": string;
     "ownerID": string;
 }
