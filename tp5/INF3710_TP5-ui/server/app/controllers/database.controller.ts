@@ -162,6 +162,31 @@ export class DatabaseController {
                 res.json(-1);
             });
 });
+
+        router.delete("/animal/delete",
+                      (req: Request, res: Response, next: NextFunction) => {
+    const animalID: string = req.body.animalID;
+    const ownerID: string = req.body.ownerID;
+// tslint:disable-next-line: max-line-length
+// delete the animal THEN queries all the remaining animals for subscribe
+    this.databaseService.deleteAnimal(animalID, ownerID).then();
+    this.databaseService.getAnimals().then((result: pg.QueryResult) => {
+        const animals: Animal[] = result.rows.map((a: any) => (
+        {
+            animalID : a.animalID,
+            animalName: a.animalNAme,
+            animalType: a.animalType,
+            description: a.description,
+            inscriptionDate: a.inscriptionDate,
+            animalState: a.animalState,
+            ownerID: a.ownerID
+        }));
+        res.json(animals);
+    }).catch((e: Error) => {
+    console.error(e.stack);
+    res.json(-1);
+        });
+    });
         return router;
     }
 }
