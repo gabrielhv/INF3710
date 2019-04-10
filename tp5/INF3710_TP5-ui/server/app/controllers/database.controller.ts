@@ -276,6 +276,18 @@ export class DatabaseController {
             console.error(e.stack);
             });
         });
+
+        router.get("/animal/bill",
+                   (req: Request, res: Response, next: NextFunction) => {
+            const animalID: string = req.body;
+            // Send the request to the service and send the response
+            this.databaseService.GetBillFromAnimal(animalID).then((result: pg.QueryResult) => {
+            res.json(result);
+            }).catch((e: Error) => {
+            console.error(e.stack);
+            });
+        });
+
         return router;
     }
 }
