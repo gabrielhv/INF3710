@@ -259,6 +259,23 @@ export class DatabaseController {
             console.error(e.stack);
             });
         });
+
+        router.get("/animal/treatments",
+                   (req: Request, res: Response, next: NextFunction) => {
+            const animalID: string = req.body;
+            // Send the request to the service and send the response
+            this.databaseService.GetTreatmentsFromAnimal(animalID).then((result: pg.QueryResult) => {
+            const treatments: Treatment[] = result.rows.map((t: any) => (
+                {
+                treatmentNumber: t.tratmentNumber,
+                description: t.description,
+                treatmentCost: t.treatmentCost
+                }));
+            res.json(treatments);
+            }).catch((e: Error) => {
+            console.error(e.stack);
+            });
+        });
         return router;
     }
 }
