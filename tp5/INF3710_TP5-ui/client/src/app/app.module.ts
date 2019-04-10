@@ -4,6 +4,7 @@ import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
 import { BrowserModule } from "@angular/platform-browser";
+import { AnimalComponent } from "./animal/animal.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { CommunicationService } from "./communication.service";
@@ -15,6 +16,7 @@ import { RoomComponent } from "./room/room.component";
     AppComponent,
     RoomComponent,
     HotelComponent,
+    AnimalComponent,
   ],
   imports: [
     CommonModule,
