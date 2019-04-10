@@ -239,6 +239,26 @@ export class DatabaseController {
             });
         });
 
+        router.get("/animalsSearch",
+                   (req: Request, res: Response, next: NextFunction) => {
+            const animalName: string = req.body;
+            // Send the request to the service and send the response
+            this.databaseService.GetAnimalsFromAnimalName(animalName).then((result: pg.QueryResult) => {
+            const animals: Animal[] = result.rows.map((a: any) => (
+                {
+                animalID : a.animalID,
+                animalName: a.animalNAme,
+                animalType: a.animalType,
+                description: a.description,
+                inscriptionDate: a.inscriptionDate,
+                animalState: a.animalState,
+                ownerID: a.ownerID
+                }));
+            res.json(animals);
+            }).catch((e: Error) => {
+            console.error(e.stack);
+            });
+        });
         return router;
     }
 }
