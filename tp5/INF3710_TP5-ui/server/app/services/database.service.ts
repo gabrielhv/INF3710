@@ -104,6 +104,19 @@ export class DatabaseService {
         return this.pool.query(queryText);
     }
 
+    public GetAnimalsFromAnimalName(searchEntry: string): Promise<pg.QueryResult>{
+        this.pool.connect();
+// tslint:disable-next-line: max-line-length
+        const queryText: string = "SELECT * FROM VetoSansFrontieresDB.animal a WHERE LOWER(a.animalName) LIKE LOWER'%" + searchEntry + "%';";
+        return this.pool.query(queryText);
+    }
+    
+    public GetTreatmentsFromAnimal(animalID: string): Promise<pg.QueryResult> {
+        this.pool.connect();
+// tslint:disable-next-line: max-line-length
+        const queryText: string = "SELECT t.* FROM (SELECT tr.*, ex.animalID from VetoSansFrontieresDB.examDetails ex NATURAL JOIN VetoSansFrontieresDB.treatmentDetails tr) as T1 NATURAL JOIN VetoSansFrontieresDB.treatment t WHERE T1.animalID = '" + animalID + "';";
+        return this.pool.query(queryText);
+    }
 
 
     /*
