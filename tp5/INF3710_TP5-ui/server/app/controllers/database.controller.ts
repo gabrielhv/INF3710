@@ -187,6 +187,35 @@ export class DatabaseController {
     res.json(-1);
         });
     });
+
+        router.put("/animal/update",
+                   (req: Request, res: Response, next: NextFunction) => {
+                    const animalID: string = req.body.animalID;
+                    const animalName: string = req.body.animalName;
+                    const animalType: string = req.body.animalType;
+                    const description: string = req.body.description;
+                    const inscriptionDate: string = req.body.inscriptionDate;
+                    const animalState: string = req.body.animalState;
+                    const ownerID: string = req.body.ownerID;
+                    this.databaseService.createAnimal(animalID, animalName, animalType, description, inscriptionDate, animalState, ownerID);
+
+                    this.databaseService.getAnimals().then((result: pg.QueryResult) => {
+            const animals: Animal[] = result.rows.map((a: any) => (
+            {
+            animalID : a.animalID,
+            animalName: a.animalNAme,
+            animalType: a.animalType,
+            description: a.description,
+            inscriptionDate: a.inscriptionDate,
+            animalState: a.animalState,
+            ownerID: a.ownerID
+            }));
+            res.json(animals);
+            }).catch((e: Error) => {
+            console.error(e.stack);
+            res.json(-1);
+        });
+    });
         return router;
     }
 }
