@@ -1,10 +1,10 @@
 export interface Animal {
     
-    "animalID": string;
-    "animalName": string;
-    "animalType": string;
+    "animalid": string;
+    "animalname": string;
+    "animaltype": string;
     "description": string;
-    "inscriptionDate": string;
-    "animalState": string;
-    "ownerID": string;
+    "inscriptiondate": string;
+    "animalstate": string;
+    "ownerid": string;
 }

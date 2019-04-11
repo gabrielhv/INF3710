@@ -34,7 +34,7 @@ create table if not exists Employee (
 );
 
 create table if not exists Owner(
-	ownerID		          varchar(20) not null,
+	ownerid		          varchar(20) not null,
 	ownername	          varchar(20) not null,
 	street		          varchar(20) not null,
 	zipCode		          varchar(20) not null,
@@ -42,20 +42,20 @@ create table if not exists Owner(
 	city		            varchar(20) not null,
 	phoneNumber	        varchar(10)  not null,
 	clinicID	          varchar(20) not null,
-	primary key (ownerID),
+	primary key (ownerid),
 	Foreign key (clinicID) references Clinic(clinicID)
 );
 
 create table if not exists Animal(	
-	animalID	        varchar(10) not null,
-	animalName	      varchar(10) not null,
-	animalType	      varchar(10) not null,
+	animalid	        varchar(10) not null,
+	animalname	      varchar(10) not null,
+	animaltype	      varchar(10) not null,
 	description	      varchar(200) not null,
-	inscriptionDate	  varchar(10) not null,
+	inscriptiondate	  varchar(10) not null,
 	animalstate	      varchar(10) not null,
-	ownerID		        varchar(10) not null,
-	primary key (animalID),
-	Foreign key (ownerID) references Owner(ownerID)
+	ownerid		        varchar(10) not null,
+	primary key (animalid),
+	Foreign key (ownerid) references Owner(ownerid)
 );
 
 create table if not exists examDetails (
@@ -63,10 +63,10 @@ create table if not exists examDetails (
 	examdate	      date not null,
 	examHour	      time not null,
 	description	    varchar(200) not null,
-	animalID	      varchar(10) not null,
+	animalid	      varchar(10) not null,
 	vetID		        varchar(10) not null,
 	primary key(examID),
-	Foreign key (animalID) references Animal(animalID),
+	Foreign key (animalid) references Animal(animalid),
 	Foreign key (vetID) references Employee (EmployeeID)
 );
 

@@ -14,7 +14,7 @@ export class DatabaseService {
         database: "VetoSansFrontieresDB",
         password: "admin",
         port: 5432,
-        host: "localhost",
+        host: "127.0.0.1",
         keepAlive : true
     };
 
@@ -43,56 +43,56 @@ export class DatabaseService {
     public getAnimals(): Promise<pg.QueryResult> {
     this.pool.connect();
 
-    return this.pool.query('SELECT * FROM VetoSansFrontieresDB.animal;');
+    return this.pool.query(`SELECT * FROM VetoSansFrontieresDB.Animal;`);
 }
 
-// animalID, animalName, animalType, description, inscriptionDate, animalState, ownerID
+// animalid, animalname, animaltype, description, inscriptiondate, animalstate, ownerid
 // tslint:disable-next-line: max-line-length
-    public createAnimal(animalID: string, animalName: string, animalType: string, description: string, inscriptionDate: string, animalState: string, ownerID: string): Promise<pg.QueryResult> {
+    public createAnimal(animalid: string, animalname: string, animaltype: string, description: string, inscriptiondate: string, animalstate: string, ownerid: string): Promise<pg.QueryResult> {
     this.pool.connect();
     const values: string[] = [
-        animalID,
-        animalName,
-        animalType,
+        animalid,
+        animalname,
+        animaltype,
         description,
-        inscriptionDate,
-        animalState,
-        ownerID,
+        inscriptiondate.toString(),
+        animalstate,
+        ownerid,
     ];
     const queryText: string = `INSERT INTO VetoSansFrontieresDB.animal VALUES($1, $2, $3, $4, $5, $6, $7);`;
 
     return this.pool.query(queryText, values);
 }
-    public deleteAnimal(animalID: string, ownerID: string): Promise<pg.QueryResult> {
+    public deleteAnimal(animalid: string, ownerid: string): Promise<pg.QueryResult> {
 // tslint:disable-next-line: no-floating-promises
     this.pool.connect();
     const values: string[] = [
-        animalID,
-        ownerID,
+        animalid,
+        ownerid,
     ];
-    const queryText: string = `DELETE FROM VetoSansFrontieresDB.animal WHERE VetoSansFrontieresDB.animal.animalID = VALUES($1) AND ownerID = VALUES($2);`;
+    const queryText: string = `DELETE FROM VetoSansFrontieresDB.animal WHERE VetoSansFrontieresDB.animal.animalid = VALUES($1) AND ownerid = VALUES($2);`;
     return this.pool.query(queryText, values);
     }
 
-    public UpdateAnimal(animalID: string, animalName: string, animalType: string, description: string, inscriptionDate: string, animalState: string, ownerID: string): Promise<pg.QueryResult> {
+    public UpdateAnimal(animalid: string, animalname: string, animaltype: string, description: string, inscriptiondate: string, animalstate: string, ownerid: string): Promise<pg.QueryResult> {
 // tslint:disable-next-line: no-floating-promises
         this.pool.connect();
         const values: string[] = [
-            animalID,
-            animalName,
-            animalType,
+            animalid,
+            animalname,
+            animaltype,
             description,
-            inscriptionDate,
-            animalState,
-            ownerID,
+            inscriptiondate,
+            animalstate,
+            ownerid,
         ];
-        const queryText: string = `UPDATE VetoSansFrontieresDB.animal SET animalName = VALUES($2), animalType = VALUES($3), description = VALUES($4), inscriptionDate = VALUES($5), animalState = VALUES($6);`;
+        const queryText: string = `UPDATE VetoSansFrontieresDB.animal SET animalname = VALUES($2), animaltype = VALUES($3), description = VALUES($4), inscriptiondate = VALUES($5), animalstate = VALUES($6);`;
         return this.pool.query(queryText, values);
     }
 
     public getOwnersID(): Promise<pg.QueryResult> {
         this.pool.connect();
-        const queryText: string = `SELECT ownerID FROM VetoSansFrontieres.owner;`;
+        const queryText: string = `SELECT ownerid FROM VetoSansFrontieres.owner;`;
         return this.pool.query(queryText);
     }
 
@@ -100,28 +100,28 @@ export class DatabaseService {
     public GetAnimalNamesFromSearchEntry(searchEntry: string): Promise<pg.QueryResult>{
         this.pool.connect();
 // tslint:disable-next-line: max-line-length
-        const queryText: string = "SELECT a.animalName FROM VetoSansFrontieresDB.animal a WHERE LOWER(a.animalName) LIKE LOWER'%" + searchEntry + "%';";
+        const queryText: string = "SELECT a.animalname FROM VetoSansFrontieresDB.animal a WHERE LOWER(a.animalname) LIKE LOWER'%" + searchEntry + "%';";
         return this.pool.query(queryText);
     }
 
     public GetAnimalsFromAnimalName(searchEntry: string): Promise<pg.QueryResult>{
         this.pool.connect();
 // tslint:disable-next-line: max-line-length
-        const queryText: string = "SELECT * FROM VetoSansFrontieresDB.animal a WHERE LOWER(a.animalName) LIKE LOWER'%" + searchEntry + "%';";
+        const queryText: string = "SELECT * FROM VetoSansFrontieresDB.Animal a WHERE LOWER(a.animalname) LIKE LOWER'%" + searchEntry + "%';";
         return this.pool.query(queryText);
     }
     
-    public GetTreatmentsFromAnimal(animalID: string): Promise<pg.QueryResult> {
+    public GetTreatmentsFromAnimal(animalid: string): Promise<pg.QueryResult> {
         this.pool.connect();
 // tslint:disable-next-line: max-line-length
-        const queryText: string = "SELECT t.* FROM (SELECT tr.*, ex.animalID from VetoSansFrontieresDB.examDetails ex NATURAL JOIN VetoSansFrontieresDB.treatmentDetails tr) as T1 NATURAL JOIN VetoSansFrontieresDB.treatment t WHERE T1.animalID = '" + animalID + "';";
+        const queryText: string = "SELECT t.* FROM (SELECT tr.*, ex.animalid from VetoSansFrontieresDB.examDetails ex NATURAL JOIN VetoSansFrontieresDB.treatmentDetails tr) as T1 NATURAL JOIN VetoSansFrontieresDB.treatment t WHERE T1.animalid = '" + animalid + "';";
         return this.pool.query(queryText);
     }
 
-    public GetBillFromAnimal(animalID: string): Promise<pg.QueryResult> {
+    public GetBillFromAnimal(animalid: string): Promise<pg.QueryResult> {
         this.pool.connect();
 // tslint:disable-next-line: max-line-length
-        const queryText: string = "SELECT SUM(treatmentcost) FROM (SELECT tr.*, ex.animalID from VetoSansFrontieresDB.examDetails ex NATURAL JOIN VetoSansFrontieresDB.treatmentDetails tr) as T1 NATURAL JOIN VetoSansFrontieresDB.treatment t WHERE T1.animalID = '" + animalID + "';";
+        const queryText: string = "SELECT SUM(treatmentcost) FROM (SELECT tr.*, ex.animalid from VetoSansFrontieresDB.examDetails ex NATURAL JOIN VetoSansFrontieresDB.treatmentDetails tr) as T1 NATURAL JOIN VetoSansFrontieresDB.treatment t WHERE T1.animalid = '" + animalid + "';";
         return this.pool.query(queryText);
     }
 
