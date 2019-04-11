@@ -124,7 +124,7 @@ export class DatabaseController {
                     });
             });
 
-        router.get("/animals",
+        router.get("/animal",
                    (req: Request, res: Response, next: NextFunction) => {
             this.databaseService.getAnimals()
                 .then((result: pg.QueryResult) => {
