@@ -66,10 +66,10 @@ VALUES ('EX501', DATE'2019-04-01', '14:25:00', 'dental exam', 'A401', 'E1');
 insert into VetoSansFrontieresDB.examDetails(examID, examDate, examHour, description, animalid, vetID)
 VALUES ('EX502', DATE'2019-04-02', '15:25:00', 'Health exam', 'A402', 'E6');
 
-insert into VetoSansFrontieresDB.treatment(treatmentNumber, description, treatmentcost)
+insert into VetoSansFrontieresDB.treatment(treatmentnumber, description, treatmentcost)
 VALUES ('T100', 'Peniciline treatment', 50.00);
-insert into VetoSansFrontieresDB.treatment(treatmentNumber, description, treatmentcost)
+insert into VetoSansFrontieresDB.treatment(treatmentnumber, description, treatmentcost)
 VALUES ('T112', 'Cold Vaccination', 70.00);
 
-insert into VetoSansFrontieresDB.treatmentDetails(treatmentNumber, examID, quantity, startDate, endDate)
+insert into VetoSansFrontieresDB.treatmentDetails(treatmentnumber, examID, quantity, startDate, endDate)
 VALUES ('T100', 'EX500', 5, DATE'2019-04-01', DATE'2019-04-6');`;

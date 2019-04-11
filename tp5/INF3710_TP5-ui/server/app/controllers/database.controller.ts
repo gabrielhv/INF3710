@@ -267,9 +267,9 @@ export class DatabaseController {
             this.databaseService.GetTreatmentsFromAnimal(animalid).then((result: pg.QueryResult) => {
             const treatments: Treatment[] = result.rows.map((t: any) => (
                 {
-                treatmentNumber: t.tratmentNumber,
+                treatmentnumber: t.tratmentNumber,
                 description: t.description,
-                treatmentCost: t.treatmentCost
+                treatmentcost: t.treatmentcost
                 }));
             res.json(treatments);
             }).catch((e: Error) => {

@@ -1,6 +1,6 @@
 export interface Treatment {
     
-    "treatmentNumber": string;
+    "treatmentnumber": string;
     "description": string;
-    "treatmentCost": string;
+    "treatmentcost": string;
 }

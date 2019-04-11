@@ -71,20 +71,20 @@ create table if not exists examDetails (
 );
 
 create table if not exists treatment(
-	treatmentNumber		varchar(10) not null,
+	treatmentnumber		varchar(10) not null,
 	description			varchar(200) not null,
 	treatmentcost		numeric(6,2) not null,
-	primary key (treatmentNumber)
+	primary key (treatmentnumber)
 );
 
 create table if not exists treatmentDetails (
-	treatmentNumber	      varchar(10) not null, 
+	treatmentnumber	      varchar(10) not null, 
 	examID				  varchar(10) not null,
   	quantity              int,
   	startDate             date not null,
   	endDate               date not null,
-	primary key (treatmentNumber, examID),
-	Foreign key(treatmentNumber) references treatment(treatmentNumber),
+	primary key (treatmentnumber, examID),
+	Foreign key(treatmentnumber) references treatment(treatmentnumber),
 	Foreign key (examID) references ExamDetails(examID)
 );
 
