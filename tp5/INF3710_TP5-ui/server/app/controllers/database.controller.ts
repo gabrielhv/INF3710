@@ -123,20 +123,20 @@ export class DatabaseController {
                         console.error(e.stack);
                     });
             });
-
+            
         router.get("/animals",
                    (req: Request, res: Response, next: NextFunction) => {
             this.databaseService.getAnimals()
                 .then((result: pg.QueryResult) => {
-                    const animals: Animal[] = result.rows.map((a: any) => (
+                    const animals: Animal[] = result.rows.map((a: Animal) => (
                     {
-                    animalID : a.animalID,
-                    animalName: a.animalName,
-                    animalType: a.animalType,
+                    animalid : a.animalid,
+                    animalname: a.animalname,
+                    animaltype: a.animaltype,
                     description: a.description,
-                    inscriptionDate: a.inscriptionDate,
-                    animalState: a.animalState,
-                    ownerID: a.ownerID
+                    inscriptiondate: a.inscriptiondate,
+                    animalstate: a.animalstate,
+                    ownerid: a.ownerid
                     }));
                     res.json(animals);
                     }).catch((e: Error) => {
@@ -147,15 +147,15 @@ export class DatabaseController {
         router.post("/animal/insert",
 // tslint:disable-next-line: max-func-body-length
                     (req: Request, res: Response, next: NextFunction) => {
-                const animalID: string = req.body.animalID;
-                const animalName: string = req.body.animalName;
-                const animalType: string = req.body.animalType;
+                const animalid: string = req.body.animalid;
+                const animalname: string = req.body.animalname;
+                const animaltype: string = req.body.animaltype;
                 const description: string = req.body.description;
-                const inscriptionDate: string = req.body.inscriptionDate;
-                const animalState: string = req.body.animalState;
-                const ownerID: string = req.body.ownerID;
+                const inscriptiondate: string = req.body.inscriptiondate;
+                const animalstate: string = req.body.animalstate;
+                const ownerid: string = req.body.ownerid;
 // tslint:disable-next-line: max-line-length
-                this.databaseService.createAnimal(animalID, animalName, animalType, description, inscriptionDate, animalState, ownerID).then((result: pg.QueryResult) => {
+                this.databaseService.createAnimal(animalid, animalname, animaltype, description, inscriptiondate, animalstate, ownerid).then((result: pg.QueryResult) => {
                 res.json(result.rowCount);
             }).catch((e: Error) => {
                 console.error(e.stack);
@@ -165,21 +165,21 @@ export class DatabaseController {
 
         router.delete("/animal/delete",
                       (req: Request, res: Response, next: NextFunction) => {
-    const animalID: string = req.body.animalID;
-    const ownerID: string = req.body.ownerID;
+    const animalid: string = req.body.animalid;
+    const ownerid: string = req.body.ownerid;
 // tslint:disable-next-line: max-line-length
 // delete the animal THEN queries all the remaining animals for subscribe
-    this.databaseService.deleteAnimal(animalID, ownerID).then();
+    this.databaseService.deleteAnimal(animalid, ownerid).then();
     this.databaseService.getAnimals().then((result: pg.QueryResult) => {
         const animals: Animal[] = result.rows.map((a: any) => (
         {
-            animalID : a.animalID,
-            animalName: a.animalName,
-            animalType: a.animalType,
+            animalid : a.animalid,
+            animalname: a.animalname,
+            animaltype: a.animaltype,
             description: a.description,
-            inscriptionDate: a.inscriptionDate,
-            animalState: a.animalState,
-            ownerID: a.ownerID
+            inscriptiondate: a.inscriptiondate,
+            animalstate: a.animalstate,
+            ownerid: a.ownerid
         }));
         res.json(animals);
     }).catch((e: Error) => {
@@ -190,25 +190,25 @@ export class DatabaseController {
 
         router.put("/animal/update",
                    (req: Request, res: Response, next: NextFunction) => {
-                    const animalID: string = req.body.animalID;
-                    const animalName: string = req.body.animalName;
-                    const animalType: string = req.body.animalType;
+                    const animalid: string = req.body.animalid;
+                    const animalname: string = req.body.animalname;
+                    const animaltype: string = req.body.animaltype;
                     const description: string = req.body.description;
-                    const inscriptionDate: string = req.body.inscriptionDate;
-                    const animalState: string = req.body.animalState;
-                    const ownerID: string = req.body.ownerID;
-                    this.databaseService.createAnimal(animalID, animalName, animalType, description, inscriptionDate, animalState, ownerID);
+                    const inscriptiondate: string = req.body.inscriptiondate;
+                    const animalstate: string = req.body.animalstate;
+                    const ownerid: string = req.body.ownerid;
+                    this.databaseService.createAnimal(animalid, animalname, animaltype, description, inscriptiondate, animalstate, ownerid);
 
                     this.databaseService.getAnimals().then((result: pg.QueryResult) => {
             const animals: Animal[] = result.rows.map((a: any) => (
             {
-            animalID : a.animalID,
-            animalName: a.animalName,
-            animalType: a.animalType,
+            animalid : a.animalid,
+            animalname: a.animalname,
+            animaltype: a.animaltype,
             description: a.description,
-            inscriptionDate: a.inscriptionDate,
-            animalState: a.animalState,
-            ownerID: a.ownerID
+            inscriptiondate: a.inscriptiondate,
+            animalstate: a.animalstate,
+            ownerid: a.ownerid
             }));
             res.json(animals);
             }).catch((e: Error) => {
@@ -220,20 +220,20 @@ export class DatabaseController {
                    (req: Request, res: Response, next: NextFunction) => {
                     // Send the request to the service and send the response
                     this.databaseService.getOwnersID().then((result: pg.QueryResult) => {
-                        const ownersID: string[] = result.rows.map((row: any) => row.ownerID);
+                        const ownersID: string[] = result.rows.map((row: any) => row.ownerid);
                         res.json(ownersID);
                       }).catch((e: Error) => {
                     console.error(e.stack);
                 });
         });
 
-        router.get("/animalNamesSuggestions",
+        router.get("/animalnamesSuggestions",
                    (req: Request, res: Response, next: NextFunction) => {
             const searchEntry: string = req.body;
          // Send the request to the service and send the response
             this.databaseService.GetAnimalNamesFromSearchEntry(searchEntry).then((result: pg.QueryResult) => {
-             const animalNames: string[] = result.rows.map((row: any) => row.animalName);
-             res.json(animalNames);
+             const animalnames: string[] = result.rows.map((row: any) => row.animalname);
+             res.json(animalnames);
            }).catch((e: Error) => {
          console.error(e.stack);
             });
@@ -241,18 +241,18 @@ export class DatabaseController {
 
         router.get("/animalsSearch",
                    (req: Request, res: Response, next: NextFunction) => {
-            const animalName: string = req.body;
+            const animalname: string = req.body;
             // Send the request to the service and send the response
-            this.databaseService.GetAnimalsFromAnimalName(animalName).then((result: pg.QueryResult) => {
+            this.databaseService.GetAnimalsFromAnimalName(animalname).then((result: pg.QueryResult) => {
             const animals: Animal[] = result.rows.map((a: any) => (
                 {
-                animalID : a.animalID,
-                animalName: a.animalName,
-                animalType: a.animalType,
+                animalid : a.animalid,
+                animalname: a.animalname,
+                animaltype: a.animaltype,
                 description: a.description,
-                inscriptionDate: a.inscriptionDate,
-                animalState: a.animalState,
-                ownerID: a.ownerID
+                inscriptiondate: a.inscriptiondate,
+                animalstate: a.animalstate,
+                ownerid: a.ownerid
                 }));
             res.json(animals);
             }).catch((e: Error) => {
@@ -262,9 +262,9 @@ export class DatabaseController {
 
         router.get("/animal/treatments",
                    (req: Request, res: Response, next: NextFunction) => {
-            const animalID: string = req.body;
+            const animalid: string = req.body;
             // Send the request to the service and send the response
-            this.databaseService.GetTreatmentsFromAnimal(animalID).then((result: pg.QueryResult) => {
+            this.databaseService.GetTreatmentsFromAnimal(animalid).then((result: pg.QueryResult) => {
             const treatments: Treatment[] = result.rows.map((t: any) => (
                 {
                 treatmentNumber: t.tratmentNumber,
@@ -279,9 +279,9 @@ export class DatabaseController {
 
         router.get("/animal/bill",
                    (req: Request, res: Response, next: NextFunction) => {
-            const animalID: string = req.body;
+            const animalid: string = req.body;
             // Send the request to the service and send the response
-            this.databaseService.GetBillFromAnimal(animalID).then((result: pg.QueryResult) => {
+            this.databaseService.GetBillFromAnimal(animalid).then((result: pg.QueryResult) => {
             res.json(result);
             }).catch((e: Error) => {
             console.error(e.stack);

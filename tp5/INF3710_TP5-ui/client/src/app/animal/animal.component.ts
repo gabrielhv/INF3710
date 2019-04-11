@@ -13,22 +13,22 @@ export class AnimalComponent {
   public duplicateError: boolean = false;
 
   public insertAnimal(
-                      animalID: string,
-                      animalName: string,
-                      animalType: string,
+                      animalid: string,
+                      animalname: string,
+                      animaltype: string,
                       description: string,
-                      inscriptionDate: string,
+                      inscriptiondate: string,
                       animalstate: string,
-                      ownerID: string ): void {
+                      ownerid: string ): void {
 
     const animal: any = {
-      "animalID": animalID,
-      "animalName": animalName,
-      "animalType": animalType,
+      "animalid": animalid,
+      "animalname": animalname,
+      "animaltype": animaltype,
       "description": description,
-      "inscriptionDate": inscriptionDate,
+      "inscriptiondate": inscriptiondate,
       "animalstate": animalstate,
-      "ownerID": ownerID
+      "ownerid": ownerid
     };
 
     this.communicationService.insertAnimal(animal).subscribe((res: number) => {
