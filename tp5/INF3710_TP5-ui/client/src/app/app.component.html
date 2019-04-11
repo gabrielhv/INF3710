@@ -3,20 +3,23 @@
 
 
 <nav class="navbar navbar-dark bg-dark mb-5">
-    <a class="navbar-brand title" href="/">INF3710-TP5</a>
-    <div class="navbar-expand mr-auto">
-      <div class="navbar-nav">
-        <a class="nav-item nav-link active" routerLink="/hotel">Hotels</a>
-        <a class="nav-item nav-link active" routerLink="/room">Rooms</a>
-        <a class="nav-item nav-link active" routerLink="/animal">Animal</a>
-      </div>
-    </div>
-  </nav>
+  <a class="navbar-brand title" href="/">INF3710-TP5</a>
+  <div class="navbar-expand mr-auto" style="color: white;">
+    Sauvons les animaux!
+  </div>
+</nav>
 
-<div style="text-align:center">
-<div *ngIf="route == ''">
-  <button mat-fab class="btn btn-danger" (click) ="createDB()">Create Database</button>
-</div>
+<mat-tab-group mat-align-tabs="center" class="columnHeader" style="text-align:center">
+    <mat-tab label="Page principale">
+      <div *ngIf="route == ''">
+        <button mat-raised-button color="primary" class="btn btn-danger" (click) ="createDB()">Create Database</button>
+      </div>
+    </mat-tab>
+    <mat-tab label="Animals">
+        <app-animal></app-animal>
+    </mat-tab>
+  </mat-tab-group>
+
 
 <router-outlet></router-outlet>
 
