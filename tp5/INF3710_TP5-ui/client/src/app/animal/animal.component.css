@@ -3,31 +3,11 @@
     margin-top: 1%;
 }
 
-.animalform {
-    width: 50%;
-    margin-left: 25%;
-    margin-right: 25%;
-    border: 1px solid black;
-    border-collapse: collapse;
-}
-
 .animalMatForm {
     width: 30%;
     margin-left: 25%;
     margin-right: 25%;
     text-align: center;
-}
-
-ul {
-    list-style: none;
-    border: solid 1px blue; 
-    font-weight: bold; 
-}
-
-li {
-    background-color:yellow; 
-    color: red;
-    font-style: italic;
 }
 
 .form-control{

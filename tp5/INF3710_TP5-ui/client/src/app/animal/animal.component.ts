@@ -17,18 +17,21 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ["./animal.component.css"]
 })
 export class AnimalComponent {
+  public readonly descriptionMaxLength: number = 200;
+  public readonly entryMaxLength: number = 20;
+
   public duplicateError: boolean = false;
 
   public constructor(private communicationService: CommunicationService) { }
 
   public animalFormControl: FormControl = new FormControl("", [
     Validators.required,
-    Validators.maxLength(20),
+    Validators.maxLength(this.entryMaxLength),
   ]);
 
   public animalDescriptionFormControl: FormControl = new FormControl("", [
     Validators.required,
-    Validators.maxLength(200),
+    Validators.maxLength(this.descriptionMaxLength),
   ]);
 
   public matcher: MyErrorStateMatcher = new MyErrorStateMatcher();
