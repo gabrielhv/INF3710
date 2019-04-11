@@ -124,14 +124,14 @@ export class DatabaseController {
                     });
             });
 
-        router.get("/animal",
+        router.get("/animals",
                    (req: Request, res: Response, next: NextFunction) => {
             this.databaseService.getAnimals()
                 .then((result: pg.QueryResult) => {
                     const animals: Animal[] = result.rows.map((a: any) => (
                     {
                     animalID : a.animalID,
-                    animalName: a.animalNAme,
+                    animalName: a.animalName,
                     animalType: a.animalType,
                     description: a.description,
                     inscriptionDate: a.inscriptionDate,
@@ -174,7 +174,7 @@ export class DatabaseController {
         const animals: Animal[] = result.rows.map((a: any) => (
         {
             animalID : a.animalID,
-            animalName: a.animalNAme,
+            animalName: a.animalName,
             animalType: a.animalType,
             description: a.description,
             inscriptionDate: a.inscriptionDate,
@@ -203,7 +203,7 @@ export class DatabaseController {
             const animals: Animal[] = result.rows.map((a: any) => (
             {
             animalID : a.animalID,
-            animalName: a.animalNAme,
+            animalName: a.animalName,
             animalType: a.animalType,
             description: a.description,
             inscriptionDate: a.inscriptionDate,
@@ -247,7 +247,7 @@ export class DatabaseController {
             const animals: Animal[] = result.rows.map((a: any) => (
                 {
                 animalID : a.animalID,
-                animalName: a.animalNAme,
+                animalName: a.animalName,
                 animalType: a.animalType,
                 description: a.description,
                 inscriptionDate: a.inscriptionDate,
