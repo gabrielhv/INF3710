@@ -18,6 +18,9 @@
   <mat-tab label="Animals" class="navtab">
       <app-animal></app-animal>
   </mat-tab>
+  <mat-tab label="Recherche" class="navtab">
+      Component de recherche
+  </mat-tab>
 </mat-tab-group>
 
 
@@ -26,15 +29,22 @@
 
 <div id="ht" style="text-align:center" *ngIf="route != '/room'">
   <button type="button" class="btn btn-primary" (click)="getAnimals()">Get Animals</button>
-  <table id ="ht" align="center" border="1" width="350">
+  <table id ="animalinfos" align="center" border="1" width="40%">
     <thead>
-      <th> Animal name</th>
-      <th> Type</th>
+      <th>Animal name</th>
+      <th>Type</th>
+      <th>Treatments</th>
+      <th>Modify</th>
+      <th>Remove</th>
     </thead>
     <tbody>
       <tr *ngFor="let animal of animals">
         <td> {{animal.animalname}}</td>
         <td> {{animal.animaltype}} </td>
+        <td><button mat-raised-button color="secondary" class="getTreatmentsButton" (click)="getTreatments(animal)"></button></td>
+        <td><button mat-raised-button color="secondary" class="getBillButton" (click)="getBill(animal)"></button></td>
+        <td><button mat-raised-button color="secondary" class="modifyButton" (click)="modifyAnimal(animal)"></button></td>
+        <td><button mat-raised-button color="red" class="deleteButton" (click)="removeAnimal(animal)"></button></td>
       </tr>
     </tbody>
   </table>
