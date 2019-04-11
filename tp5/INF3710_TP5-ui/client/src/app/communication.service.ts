@@ -33,7 +33,7 @@ export class CommunicationService {
 
     public getAnimals(): Observable<any[]> {
 
-        return this.http.get<Animal[]>(this.BASE_URL + "/animal").pipe(
+        return this.http.get<Animal[]>(this.BASE_URL + "/animals").pipe(
             catchError(this.handleError<Animal[]>("getAnimals")),
         );
     }
