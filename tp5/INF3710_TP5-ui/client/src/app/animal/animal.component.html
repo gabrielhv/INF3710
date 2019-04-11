@@ -1,9 +1,9 @@
-<div id="hotel" style="text-align: left">
+<div id="animal">
   <h1> Animals</h1>
   <div id="error" class="alert alert-danger" role="alert" *ngIf="duplicateError">
     Insertion sur une cle primaire qui existe deja
   </div>
-  <ul style="list-style: none;">
+  <ul>
     animalID :        <li><input class="form-control col-md-4" #animalID></li>
     animalName :      <li><input class="form-control col-md-4" #animalName></li>
     animalType :      <li><input class="form-control col-md-4" #animalType></li>
@@ -11,10 +11,12 @@
     inscriptionDate : <li><input class="form-control col-md-4" #inscriptionDate></li>
     animalstate :     <li><input class="form-control col-md-4" #animalstate></li>
     ownerID :         <li><input class="form-control col-md-4" #ownerID></li>
-    <li><button 
-      type="button" class="btn btn-primary" 
-      (click)="insertAnimal(animalID.value, animalName.value, animalType.value, description.value, inscriptionDate.value, animalstate.value, ownerID.value)">
-      Add Animal
-    </button></li>
+    <li>
+      <button 
+        type="button" class="btn btn-primary" 
+        (click)="insertAnimal(animalID.value, animalName.value, animalType.value, description.value, inscriptionDate.value, animalstate.value, ownerID.value)">
+        Add Animal
+      </button>
+    </li>
   </ul>
 </div>

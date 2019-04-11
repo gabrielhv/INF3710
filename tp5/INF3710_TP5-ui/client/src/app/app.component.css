@@ -12,4 +12,12 @@
 }
 .title {
     color: red;
-  }
+}
+
+.columnHeader {
+    text-align:center;
+}
+
+.createDBButton {
+    margin-top: 1%;
+}
