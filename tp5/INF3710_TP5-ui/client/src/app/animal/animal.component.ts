@@ -1,5 +1,15 @@
 import { Component } from "@angular/core";
+import { FormControl, FormGroupDirective, NgForm, Validators } from "@angular/forms";
+import { ErrorStateMatcher } from "@angular/material/core";
 import { CommunicationService } from "../communication.service";
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  public isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted: boolean | null = form && form.submitted;
+
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
 
 @Component({
   selector: "app-animal",
@@ -7,10 +17,21 @@ import { CommunicationService } from "../communication.service";
   styleUrls: ["./animal.component.css"]
 })
 export class AnimalComponent {
+  public duplicateError: boolean = false;
 
   public constructor(private communicationService: CommunicationService) { }
 
-  public duplicateError: boolean = false;
+  public animalFormControl: FormControl = new FormControl("", [
+    Validators.required,
+    Validators.maxLength(20),
+  ]);
+
+  public animalDescriptionFormControl: FormControl = new FormControl("", [
+    Validators.required,
+    Validators.maxLength(200),
+  ]);
+
+  public matcher: MyErrorStateMatcher = new MyErrorStateMatcher();
 
   public insertAnimal(
                       animalid: string,
