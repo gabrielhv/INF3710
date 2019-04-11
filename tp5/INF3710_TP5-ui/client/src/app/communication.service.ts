@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Animal } from "../../../common/tables/Animal";
 import {Hotel} from "../../../common/tables/Hotel";
 // tslint:disable-next-line:ordered-imports
 import { of, Observable,concat, Subject } from "rxjs";
@@ -30,6 +31,13 @@ export class CommunicationService {
         );
     }
 
+    public getAnimals(): Observable<any[]> {
+
+        return this.http.get<Animal[]>(this.BASE_URL + "/animal").pipe(
+            catchError(this.handleError<Animal[]>("getAnimals")),
+        );
+    }
+
     public getHotelPKs(): Observable<string[]> {
 
         return this.http.get<string[]>(this.BASE_URL + "/hotel/hotelNo").pipe(
@@ -44,7 +52,7 @@ export class CommunicationService {
     }
 
     public insertAnimal(animal: any): Observable<number> {
-        return this.http.post<number>(this.BASE_URL + "/hotel/insert", animal).pipe(
+        return this.http.post<number>(this.BASE_URL + "/animal/insert", animal).pipe(
             catchError(this.handleError<number>("insertAnimal")),
         );
     }

@@ -22,16 +22,16 @@
 
 
 <div id="ht" style="text-align:center" *ngIf="route != '/room'">
-  <button type="button" class="btn btn-primary" (click)="getHotels()">Get Hotels</button>
+  <button type="button" class="btn btn-primary" (click)="getAnimals()">Get Animals</button>
   <table id ="ht" align="center" border="1" width="350">
     <thead>
-      <th> HOTEL</th>
-      <th> CITY</th>
+      <th> Animal name</th>
+      <th> Type</th>
     </thead>
     <tbody>
-      <tr *ngFor="let hotel of hotels">
-        <td> {{hotel.hotelname}}</td>
-        <td> {{hotel.city}} </td>
+      <tr *ngFor="let animal of animals">
+        <td> {{animal.animalName}}</td>
+        <td> {{animal.animalType}} </td>
       </tr>
     </tbody>
   </table>

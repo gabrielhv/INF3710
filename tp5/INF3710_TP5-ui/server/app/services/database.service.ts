@@ -192,7 +192,6 @@ export class DatabaseService {
         return this.pool.query(query);
     }
 
-
     public getRoomFromHotelParams(params: object): Promise<pg.QueryResult> {
         this.pool.connect();
 

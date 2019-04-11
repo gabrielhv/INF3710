@@ -3,7 +3,7 @@ import { inject, injectable } from "inversify";
 import * as pg from "pg";
 
 import {Animal} from '../../../common/tables/Animal';
-import {Hotel} from "../../../common/tables/Hotel";
+// import {Hotel} from "../../../common/tables/Hotel";
 import {Room} from '../../../common/tables/Room';
 import {Treatment} from '../../../common/tables/Treatment';
 
@@ -37,21 +37,21 @@ export class DatabaseController {
                     });
         });
 
-        router.get("/hotel",
-                   (req: Request, res: Response, next: NextFunction) => {
-                    // Send the request to the service and send the response
-                    this.databaseService.getHotels().then((result: pg.QueryResult) => {
-                    const hotels: Hotel[] = result.rows.map((hot: any) => (
-                        {
-                        hotelno: hot.hotelno,
-                        hotelname: hot.hotelname,
-                        city: hot.city
-                    }));
-                    res.json(hotels);
-                }).catch((e: Error) => {
-                    console.error(e.stack);
-                });
-            });
+        // router.get("/hotel",
+        //            (req: Request, res: Response, next: NextFunction) => {
+        //             // Send the request to the service and send the response
+        //             this.databaseService.getHotels().then((result: pg.QueryResult) => {
+        //             const hotels: Hotel[] = result.rows.map((hot: any) => (
+        //                 {
+        //                 hotelno: hot.hotelno,
+        //                 hotelname: hot.hotelname,
+        //                 city: hot.city
+        //             }));
+        //             res.json(hotels);
+        //         }).catch((e: Error) => {
+        //             console.error(e.stack);
+        //         });
+        //     });
 
         router.get("/hotel/hotelNo",
                    (req: Request, res: Response, next: NextFunction) => {
