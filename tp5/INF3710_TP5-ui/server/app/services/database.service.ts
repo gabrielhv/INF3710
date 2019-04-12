@@ -43,7 +43,7 @@ export class DatabaseService {
     public getAnimals(): Promise<pg.QueryResult> {
     this.pool.connect();
 
-    return this.pool.query(`SELECT * FROM VetoSansFrontieresDB.Animal;`);
+    return this.pool.query("SELECT * FROM VetoSansFrontieresDB.Animal;");
 }
 
 // animalid, animalname, animaltype, description, inscriptiondate, animalstate, ownerid
@@ -70,7 +70,7 @@ export class DatabaseService {
         animalid,
         ownerid,
     ];
-    const queryText: string = `DELETE FROM VetoSansFrontieresDB.animal WHERE VetoSansFrontieresDB.animal.animalid = VALUES($1) AND ownerid = VALUES($2);`;
+    const queryText: string = `DELETE FROM VetoSansFrontieresDB.animal WHERE VetoSansFrontieresDB.animal.animalid = VALUES($1) AND VetoSansFrontieresBD.owner.ownerid = VALUES($2);`;
     return this.pool.query(queryText, values);
     }
 

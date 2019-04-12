@@ -119,7 +119,7 @@ create table if not exists examDetails (
 	animalid	      varchar(10) not null,
 	vetID		        varchar(10) not null,
 	primary key(examID),
-	Foreign key (animalid) references Animal(animalid),
+	Foreign key (animalid) references Animal(animalid) ON DELETE CASCADE,
 	Foreign key (vetID) references Employee (EmployeeID)
 );
 
@@ -138,7 +138,7 @@ create table if not exists treatmentDetails (
   	endDate               date not null,
 	primary key (treatmentnumber, examID),
 	Foreign key(treatmentnumber) references treatment(treatmentnumber),
-	Foreign key (examID) references ExamDetails(examID)
+	Foreign key (examID) references ExamDetails(examID) ON DELETE CASCADE
 );
 
 `;
