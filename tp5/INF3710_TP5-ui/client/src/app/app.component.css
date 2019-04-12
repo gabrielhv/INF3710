@@ -21,3 +21,7 @@
 .createDBButton {
     margin-top: 1%;
 }
+
+th, td {
+    height: 50px;
+}

@@ -123,7 +123,7 @@ export class DatabaseController {
                         console.error(e.stack);
                     });
             });
-            
+
         router.get("/animals",
                    (req: Request, res: Response, next: NextFunction) => {
             this.databaseService.getAnimals()
@@ -165,8 +165,10 @@ export class DatabaseController {
 
         router.delete("/animal/delete",
                       (req: Request, res: Response, next: NextFunction) => {
-    const animalid: string = req.body.animalid;
-    const ownerid: string = req.body.ownerid;
+    const animalid: string = req.query.animalid;
+    const ownerid: string = req.query.ownerid;
+    console.log("oid: ", ownerid);
+    console.log("aid: ", animalid);
 // tslint:disable-next-line: max-line-length
 // delete the animal THEN queries all the remaining animals for subscribe
     this.databaseService.deleteAnimal(animalid, ownerid).then();

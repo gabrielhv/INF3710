@@ -10,10 +10,10 @@ export class DatabaseService {
 
     // A MODIFIER POUR VOTRE BD
     public connectionConfig: pg.ConnectionConfig = {
-        user: "normal_user",
+        user: "postgres",
         database: "VetoSansFrontieresDB",
         password: "admin",
-        port: 5432,
+        port: 5433,
         host: "127.0.0.1",
         keepAlive : true
     };
