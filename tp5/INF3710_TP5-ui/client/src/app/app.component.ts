@@ -57,8 +57,6 @@ export class AppComponent implements OnInit {
     public deleteAnimal(animal: any): void {
         this.communicationService.deleteAnimal(animal).subscribe((animals: Animal[]) => {
             this.animals = animals;
-            console.log("delete marche pas");
-            console.log(animals);
         });
     }
 }
