@@ -10,10 +10,10 @@ export class DatabaseService {
 
     // A MODIFIER POUR VOTRE BD
     public connectionConfig: pg.ConnectionConfig = {
-        user: "postgres",
+        user: "normal_user",
         database: "VetoSansFrontieresDB",
         password: "admin",
-        port: 5433,
+        port: 5432,
         host: "127.0.0.1",
         keepAlive : true
     };
@@ -70,9 +70,9 @@ export class DatabaseService {
             animalid,
             ownerid,
         ];
-        const queryText: string = "DELETE FROM VetoSansFrontieresDB.animal WHERE VetoSansFrontieresDB.animal.animalid = VALUES($1) AND VetoSansFrontieresBD.owner.ownerid = VALUES($2);";
+        const queryText: string = "DELETE FROM VetoSansFrontieresDB.animal WHERE animalid = '"+animalid+"' AND ownerid ='"+ownerid+"';";
 
-        return this.pool.query(queryText, values);
+        return this.pool.query(queryText);
     }
 
     public UpdateAnimal(animalid: string, animalname: string, animaltype: string, description: string, inscriptiondate: string, animalstate: string, ownerid: string): Promise<pg.QueryResult> {

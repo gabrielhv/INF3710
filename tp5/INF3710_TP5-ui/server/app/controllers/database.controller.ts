@@ -171,7 +171,7 @@ export class DatabaseController {
     console.log("aid: ", animalid);
 // tslint:disable-next-line: max-line-length
 // delete the animal THEN queries all the remaining animals for subscribe
-    this.databaseService.deleteAnimal(animalid, ownerid).then();
+    this.databaseService.deleteAnimal(animalid, ownerid).then().catch();
     this.databaseService.getAnimals().then((result: pg.QueryResult) => {
         const animals: Animal[] = result.rows.map((a: any) => (
         {
