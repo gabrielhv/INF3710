@@ -8,7 +8,6 @@ import {data} from "../populateDB_VSF";
 @injectable()
 export class DatabaseService {
 
-    // A MODIFIER POUR VOTRE BD
     public connectionConfig: pg.ConnectionConfig = {
         user: "postgres",
         database: "VetoSansFrontieresDB",
@@ -17,39 +16,45 @@ export class DatabaseService {
         host: "127.0.0.1",
         keepAlive : true
     };
+
+    public constructor() {
+        this.pool.connect();
+    }
+
+    // A MODIFIER POUR VOTRE BD
     // public connectionConfig: pg.ConnectionConfig = {
-    //     user: "normal_user",
-    //     database: "VetoSansFrontieresDB",
-    //     password: "admin",
-    //     port: 5432,
-    //     host: "127.0.0.1",
-    //     keepAlive : true
-    // };
+        //     user: "normal_user",
+        //     database: "VetoSansFrontieresDB",
+        //     password: "admin",
+        //     port: 5432,
+        //     host: "127.0.0.1",
+        //     keepAlive : true
+        // };
 
     private pool: pg.Pool = new pg.Pool(this.connectionConfig);
 
 /* fonctions propres a VetoSansFrontieres */
 
     public createSchema(): Promise<pg.QueryResult> {
-    this.pool.connect();
+    // this.pool.connect();
 
     return this.pool.query(schema);
 }
 
     public populateDb(): Promise<pg.QueryResult> {
-    this.pool.connect();
+    // this.pool.connect();
 
     return this.pool.query(data);
 }
 
     public getAllFromTable(tableName: string): Promise<pg.QueryResult> {
-    this.pool.connect();
+    // this.pool.connect();
 
     return this.pool.query(`SELECT * FROM VetoSansFrontieresDB.${tableName};`);
 }
 
     public getAnimals(): Promise<pg.QueryResult> {
-    this.pool.connect();
+    // this.pool.connect();
 
     return this.pool.query("SELECT * FROM VetoSansFrontieresDB.Animal;");
 }
@@ -57,7 +62,7 @@ export class DatabaseService {
 // animalid, animalname, animaltype, description, inscriptiondate, animalstate, ownerid
 // tslint:disable-next-line: max-line-length
     public createAnimal(animalid: string, animalname: string, animaltype: string, description: string, inscriptiondate: string, animalstate: string, ownerid: string): Promise<pg.QueryResult> {
-    this.pool.connect();
+    // this.pool.connect();
     const values: string[] = [
         animalid,
         animalname,
@@ -73,7 +78,7 @@ export class DatabaseService {
 }
     public deleteAnimal(animalid: string, ownerid: string): Promise<pg.QueryResult> {
         // tslint:disable-next-line: no-floating-promises
-        this.pool.connect();
+        // this.pool.connect();
         const queryText: string = "DELETE FROM VetoSansFrontieresDB.animal WHERE animalid = '"+animalid+"' AND ownerid ='"+ownerid+"';";
 
         return this.pool.query(queryText);
@@ -81,7 +86,7 @@ export class DatabaseService {
 
     public UpdateAnimal(animalid: string, animalname: string, animaltype: string, description: string, inscriptiondate: string, animalstate: string, ownerid: string): Promise<pg.QueryResult> {
 // tslint:disable-next-line: no-floating-promises
-        this.pool.connect();
+        // this.pool.connect();
         const values: string[] = [
             animalid,
             animalname,
@@ -96,35 +101,35 @@ export class DatabaseService {
     }
 
     public getOwnersID(): Promise<pg.QueryResult> {
-        this.pool.connect();
+        // this.pool.connect();
         const queryText: string = `SELECT ownerid FROM VetoSansFrontieres.owner;`;
         return this.pool.query(queryText);
     }
 
     //pour les suggestions de la search bar
     public GetAnimalNamesFromSearchEntry(searchEntry: string): Promise<pg.QueryResult>{
-        this.pool.connect();
+        // this.pool.connect();
 // tslint:disable-next-line: max-line-length
         const queryText: string = "SELECT a.animalname FROM VetoSansFrontieresDB.animal a WHERE LOWER(a.animalname) LIKE LOWER'%" + searchEntry + "%';";
         return this.pool.query(queryText);
     }
 
     public GetAnimalsFromAnimalName(searchEntry: string): Promise<pg.QueryResult>{
-        this.pool.connect();
+        // this.pool.connect();
 // tslint:disable-next-line: max-line-length
         const queryText: string = "SELECT * FROM VetoSansFrontieresDB.Animal a WHERE LOWER(a.animalname) LIKE LOWER'%" + searchEntry + "%';";
         return this.pool.query(queryText);
     }
     
     public GetTreatmentsFromAnimal(animalid: string): Promise<pg.QueryResult> {
-        this.pool.connect();
+        // this.pool.connect();
 // tslint:disable-next-line: max-line-length
         const queryText: string = "SELECT t.* FROM (SELECT tr.*, ex.animalid from VetoSansFrontieresDB.examDetails ex NATURAL JOIN VetoSansFrontieresDB.treatmentDetails tr) as T1 NATURAL JOIN VetoSansFrontieresDB.treatment t WHERE T1.animalid = '" + animalid + "';";
         return this.pool.query(queryText);
     }
 
     public GetBillFromAnimal(animalid: string): Promise<pg.QueryResult> {
-        this.pool.connect();
+        // this.pool.connect();
 // tslint:disable-next-line: max-line-length
         const queryText: string = "SELECT SUM(treatmentcost) FROM (SELECT tr.*, ex.animalid from VetoSansFrontieresDB.examDetails ex NATURAL JOIN VetoSansFrontieresDB.treatmentDetails tr) as T1 NATURAL JOIN VetoSansFrontieresDB.treatment t WHERE T1.animalid = '" + animalid + "';";
         return this.pool.query(queryText);
@@ -135,38 +140,38 @@ export class DatabaseService {
         METHODES DE DEBUG
     */
     // public createSchema(): Promise<pg.QueryResult> {
-    //     this.pool.connect();
+    //     // this.pool.connect();
 
     //     return this.pool.query(schema);
     // }
 
     // public populateDb(): Promise<pg.QueryResult> {
-    //     this.pool.connect();
+    //     // this.pool.connect();
 
     //     return this.pool.query(data);
     // }
 
     // public getAllFromTable(tableName: string): Promise<pg.QueryResult> {
-    //     this.pool.connect();
+    //     // this.pool.connect();
 
     //     return this.pool.query(`SELECT * FROM HOTELDB.${tableName};`);
     // }
 
     // HOTEL
     // public getHotels(): Promise<pg.QueryResult> {
-    //     this.pool.connect();
+    //     // this.pool.connect();
 
     //     return this.pool.query('SELECT * FROM HOTELDB.HOTEL;');
     // }
 
     public getHotelNo(): Promise<pg.QueryResult> {
-        this.pool.connect();
+        // this.pool.connect();
 
         return this.pool.query('SELECT hotelNo FROM HOTELDB.Hotel;');
     }
 
     public createHotel(hotelNo: string, hotelName: string, city: string): Promise<pg.QueryResult> {
-        this.pool.connect();
+        // this.pool.connect();
         const values: string[] = [
             hotelNo,
             hotelName,
@@ -179,7 +184,7 @@ export class DatabaseService {
 
     // ROOM
     public getRoomFromHotel(hotelNo: string, roomType: string, price: number): Promise<pg.QueryResult> {
-        this.pool.connect();
+        // this.pool.connect();
 
         let query: string =
         `SELECT * FROM HOTELDB.room
@@ -198,7 +203,7 @@ export class DatabaseService {
     }
 
     public getRoomFromHotelParams(params: object): Promise<pg.QueryResult> {
-        this.pool.connect();
+        // this.pool.connect();
 
         let query: string = 'SELECT * FROM HOTELDB.room \n';
         const keys: string[] = Object.keys(params);
@@ -225,7 +230,7 @@ export class DatabaseService {
     }
 
     public createRoom(room: Room): Promise<pg.QueryResult> {
-        this.pool.connect();
+        // this.pool.connect();
         const values: string[] = [
             room.roomno,
             room.hotelno,
@@ -243,7 +248,7 @@ export class DatabaseService {
                        guestName: string,
                        gender: string,
                        guestCity: string): Promise<pg.QueryResult> {
-        this.pool.connect();
+        // this.pool.connect();
         const values: string[] = [
             guestNo,
             nas,
@@ -262,7 +267,7 @@ export class DatabaseService {
                          dateFrom: Date,
                          dateTo: Date,
                          roomNo: string): Promise<pg.QueryResult> {
-        this.pool.connect();
+        // this.pool.connect();
         const values: string[] = [
             hotelNo,
             guestNo,
