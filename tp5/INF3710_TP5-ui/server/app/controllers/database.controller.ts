@@ -163,33 +163,34 @@ export class DatabaseController {
             });
 });
 
-        router.delete("/animal/delete", (req: Request, res: Response, next: NextFunction) => {
-            const animalid: string = req.query.animalid;
-            const ownerid: string = req.query.ownerid;
-            console.log("oid: ", ownerid);
-            console.log("aid: ", animalid);
-            // tslint:disable-next-line: max-line-length
-            // delete the animal THEN queries all the remaining animals for subscribe
-            this.databaseService.deleteAnimal(animalid, ownerid).then().catch((err: Error) => console.log(err));
-            this.databaseService.getAnimals().then((result: pg.QueryResult) => {
-                const animals: Animal[] = result.rows.map((a: any) => (
-                {
-                    animalid : a.animalid,
-                    animalname: a.animalname,
-                    animaltype: a.animaltype,
-                    description: a.description,
-                    inscriptiondate: a.inscriptiondate,
-                    animalstate: a.animalstate,
-                    ownerid: a.ownerid
-                }));
-                res.json(animals);
-                // console.log("animals updated: ", animals);
-            }).catch((e: Error) => {
-                console.error(e.stack);
-                res.json(-1);
-            });
+        router.delete("/animal/delete",
+                      // tslint:disable-next-line:max-func-body-length
+                      (req: Request, res: Response, next: NextFunction) => {
+    const animalid: string = req.query.animalid;
+    const ownerid: string = req.query.ownerid;
+    console.log("oid: ", ownerid);
+    console.log("aid: ", animalid);
+// tslint:disable-next-line: max-line-length
+// delete the animal THEN queries all the remaining animals for subscribe
+    this.databaseService.deleteAnimal(animalid, ownerid).then().catch();
+    this.databaseService.getAnimals().then((result: pg.QueryResult) => {
+        const animals: Animal[] = result.rows.map((a: any) => (
+        {
+            animalid : a.animalid,
+            animalname: a.animalname,
+            animaltype: a.animaltype,
+            description: a.description,
+            inscriptiondate: a.inscriptiondate,
+            animalstate: a.animalstate,
+            ownerid: a.ownerid
+        }));
+        res.json(animals);
+    }).catch((e: Error) => {
+    console.error(e.stack);
+    res.json(-1);
         });
-        
+    });
+
         router.put("/animal/update",
                    (req: Request, res: Response, next: NextFunction) => {
                     const animalid: string = req.body.animalid;
