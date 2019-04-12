@@ -44,6 +44,7 @@ export class AppComponent implements OnInit {
     public getAnimals(): void {
         this.communicationService.getAnimals().subscribe((animals: Animal[]) => {
             this.animals = animals;
+            console.log(animals);
         });
     }
 

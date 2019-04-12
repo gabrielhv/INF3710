@@ -64,14 +64,15 @@ export class DatabaseService {
     return this.pool.query(queryText, values);
 }
     public deleteAnimal(animalid: string, ownerid: string): Promise<pg.QueryResult> {
-// tslint:disable-next-line: no-floating-promises
-    this.pool.connect();
-    const values: string[] = [
-        animalid,
-        ownerid,
-    ];
-    const queryText: string = `DELETE FROM VetoSansFrontieresDB.animal WHERE VetoSansFrontieresDB.animal.animalid = VALUES($1) AND VetoSansFrontieresBD.owner.ownerid = VALUES($2);`;
-    return this.pool.query(queryText, values);
+        // tslint:disable-next-line: no-floating-promises
+        this.pool.connect();
+        const values: string[] = [
+            animalid,
+            ownerid,
+        ];
+        const queryText: string = "DELETE FROM VetoSansFrontieresDB.animal WHERE VetoSansFrontieresDB.animal.animalid = VALUES($1) AND VetoSansFrontieresBD.owner.ownerid = VALUES($2);";
+
+        return this.pool.query(queryText, values);
     }
 
     public UpdateAnimal(animalid: string, animalname: string, animaltype: string, description: string, inscriptiondate: string, animalstate: string, ownerid: string): Promise<pg.QueryResult> {
