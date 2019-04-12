@@ -10,13 +10,21 @@ export class DatabaseService {
 
     // A MODIFIER POUR VOTRE BD
     public connectionConfig: pg.ConnectionConfig = {
-        user: "normal_user",
+        user: "postgres",
         database: "VetoSansFrontieresDB",
         password: "admin",
-        port: 5432,
+        port: 5433,
         host: "127.0.0.1",
         keepAlive : true
     };
+    // public connectionConfig: pg.ConnectionConfig = {
+    //     user: "normal_user",
+    //     database: "VetoSansFrontieresDB",
+    //     password: "admin",
+    //     port: 5432,
+    //     host: "127.0.0.1",
+    //     keepAlive : true
+    // };
 
     private pool: pg.Pool = new pg.Pool(this.connectionConfig);
 
@@ -66,10 +74,6 @@ export class DatabaseService {
     public deleteAnimal(animalid: string, ownerid: string): Promise<pg.QueryResult> {
         // tslint:disable-next-line: no-floating-promises
         this.pool.connect();
-        const values: string[] = [
-            animalid,
-            ownerid,
-        ];
         const queryText: string = "DELETE FROM VetoSansFrontieresDB.animal WHERE animalid = '"+animalid+"' AND ownerid ='"+ownerid+"';";
 
         return this.pool.query(queryText);
