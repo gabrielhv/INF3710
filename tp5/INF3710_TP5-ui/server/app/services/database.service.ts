@@ -91,7 +91,7 @@ export class DatabaseService {
             animalstate,
             ownerid,
         ];
-        const queryText: string = `UPDATE VetoSansFrontieresDB.animal SET animalname = VALUES($2), animaltype = VALUES($3), description = VALUES($4), inscriptiondate = VALUES($5), animalstate = VALUES($6);`;
+        const queryText: string = `UPDATE VetoSansFrontieresDB.animal SET animalname = $2, animaltype = $3, description = $4, inscriptiondate = $5, animalstate = $6 WHERE animalid = $1 AND ownerid = $7;`;
         return this.pool.query(queryText, values);
     }
 

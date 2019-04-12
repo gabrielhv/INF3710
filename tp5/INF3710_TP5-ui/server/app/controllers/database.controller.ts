@@ -172,23 +172,23 @@ export class DatabaseController {
     console.log("aid: ", animalid);
 // tslint:disable-next-line: max-line-length
 // delete the animal THEN queries all the remaining animals for subscribe
-    this.databaseService.deleteAnimal(animalid, ownerid).then().catch();
-    this.databaseService.getAnimals().then((result: pg.QueryResult) => {
-        const animals: Animal[] = result.rows.map((a: any) => (
-        {
-            animalid : a.animalid,
-            animalname: a.animalname,
-            animaltype: a.animaltype,
-            description: a.description,
-            inscriptiondate: a.inscriptiondate,
-            animalstate: a.animalstate,
-            ownerid: a.ownerid
-        }));
-        res.json(animals);
-    }).catch((e: Error) => {
-    console.error(e.stack);
-    res.json(-1);
-        });
+    this.databaseService.deleteAnimal(animalid, ownerid).then(()=>{res.json();}).catch();
+    // this.databaseService.getAnimals().then((result: pg.QueryResult) => {
+    //     const animals: Animal[] = result.rows.map((a: any) => (
+    //     {
+    //         animalid : a.animalid,
+    //         animalname: a.animalname,
+    //         animaltype: a.animaltype,
+    //         description: a.description,
+    //         inscriptiondate: a.inscriptiondate,
+    //         animalstate: a.animalstate,
+    //         ownerid: a.ownerid
+    //     }));
+    //     res.json(animals);
+    // }).catch((e: Error) => {
+    // console.error(e.stack);
+    // res.json(-1);
+    //     });
     });
 
         router.put("/animal/update",
