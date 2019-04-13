@@ -43,7 +43,7 @@
         <td> {{animal.animalname}}</td>
         <td> {{animal.animaltype}} </td>
         <td><button mat-raised-button color="accent" class="getTreatmentsButton" (click)="getTreatments(animal)"><mat-icon>local_hospital</mat-icon></button></td>
-        <td><button mat-raised-button color="accent" class="getBillButton" (click)="getBill(animal)"><mat-icon>receipt</mat-icon></button></td>
+        <td><button mat-raised-button color="accent" class="getBillButton" (click)="getAnimalBill(animal.animalid)"><mat-icon>receipt</mat-icon></button></td>
         <td><button mat-raised-button color="accent" class="modifyButton" (click)="modifyAnimal(animal)"><mat-icon>create</mat-icon></button></td>
         <td><button mat-raised-button color="warn" class="deleteButton" (click)="deleteAnimal(animal)"><mat-icon>delete_sweep</mat-icon></button></td>
       </tr>

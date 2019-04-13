@@ -38,6 +38,13 @@ export class CommunicationService {
         );
     }
 
+    public getAnimalBill(animalid: string): Observable<number> {
+
+        return this.http.get<number>(this.BASE_URL + "/animal/bill/?animalid=" + animalid).pipe(
+            catchError(this.handleError<number>("getAnimalBill")),
+        );
+    }
+
     public getHotelPKs(): Observable<string[]> {
 
         return this.http.get<string[]>(this.BASE_URL + "/hotel/hotelNo").pipe(

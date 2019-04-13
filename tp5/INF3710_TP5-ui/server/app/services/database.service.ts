@@ -12,7 +12,7 @@ export class DatabaseService {
         user: "postgres",
         database: "VetoSansFrontieresDB",
         password: "admin",
-        port: 5433,
+        port: 5432,
         host: "127.0.0.1",
         keepAlive : true
     };

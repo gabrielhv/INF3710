@@ -168,8 +168,6 @@ export class DatabaseController {
                       (req: Request, res: Response, next: NextFunction) => {
     const animalid: string = req.query.animalid;
     const ownerid: string = req.query.ownerid;
-    console.log("oid: ", ownerid);
-    console.log("aid: ", animalid);
 // tslint:disable-next-line: max-line-length
 // delete the animal THEN queries all the remaining animals for subscribe
     // this.databaseService.deleteAnimal(animalid, ownerid).then(() => { res.json(); }).catch();
@@ -266,7 +264,7 @@ export class DatabaseController {
 
         router.get("/animal/treatments",
                    (req: Request, res: Response, next: NextFunction) => {
-            const animalid: string = req.body;
+            const animalid: string = req.query.animalid;
             // Send the request to the service and send the response
             this.databaseService.GetTreatmentsFromAnimal(animalid).then((result: pg.QueryResult) => {
             const treatments: Treatment[] = result.rows.map((t: any) => (
@@ -283,10 +281,10 @@ export class DatabaseController {
 
         router.get("/animal/bill",
                    (req: Request, res: Response, next: NextFunction) => {
-            const animalid: string = req.body;
+            const animalid: string = req.query.animalid;
             // Send the request to the service and send the response
             this.databaseService.GetBillFromAnimal(animalid).then((result: pg.QueryResult) => {
-            res.json(result);
+            res.json(result.rows[0].sum);
             }).catch((e: Error) => {
             console.error(e.stack);
             });

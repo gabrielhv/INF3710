@@ -30,7 +30,6 @@ export class AppComponent implements OnInit {
     public ngOnInit(): void {
         this.communicationService.listen().subscribe((m:any) => {
             console.log(m);
-            // this.getHotels();
             this.getAnimals();
         });
     }
@@ -44,7 +43,16 @@ export class AppComponent implements OnInit {
     public getAnimals(): void {
         this.communicationService.getAnimals().subscribe((animals: Animal[]) => {
             this.animals = animals;
-            console.log(animals);
+        });
+    }
+
+    public getAnimalBill(animalid: string): void {
+        this.communicationService.getAnimalBill(animalid).subscribe((bill: number) => {
+            if (bill) {
+                alert("Total amount of the bill: " + bill.toString());
+            } else {
+                alert("No bill linked to this animal");
+            }
         });
     }
 
