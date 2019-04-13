@@ -3,6 +3,7 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { Animal } from "../../../common/tables/Animal";
 import { Hotel } from "../../../common/tables/Hotel";
+import { Treatment } from "../../../common/tables/Treatment";
 import { CommunicationService } from "./communication.service";
 
 @Component({
@@ -52,6 +53,22 @@ export class AppComponent implements OnInit {
                 alert("Total amount of the bill: " + bill.toString());
             } else {
                 alert("No bill linked to this animal");
+            }
+        });
+    }
+
+    public getAnimalTreatments(animalid: string): void {
+        this.communicationService.getAnimalTreatments(animalid).subscribe((treatments: Treatment[]) => {
+            if (treatments) {
+                let message: string = "Treatments: \n\n";
+                treatments.forEach((treatment) => {
+                    message += "Treatment number: " + treatment.treatmentnumber + "\n";
+                    message += "Description: " + treatment.description + "\n";
+                    message += "Cost: " + treatment.treatmentcost + "\n\n";
+                });
+                alert(message);
+            } else {
+                alert("No treatment linked to this animal");
             }
         });
     }

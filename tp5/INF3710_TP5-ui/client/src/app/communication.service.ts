@@ -6,6 +6,7 @@ import {Hotel} from "../../../common/tables/Hotel";
 import { of, Observable,concat, Subject } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { Room } from "../../../common/tables/Room";
+import { Treatment } from "../../../common/tables/Treatment";
 
 @Injectable()
 export class CommunicationService {
@@ -42,6 +43,13 @@ export class CommunicationService {
 
         return this.http.get<number>(this.BASE_URL + "/animal/bill/?animalid=" + animalid).pipe(
             catchError(this.handleError<number>("getAnimalBill")),
+        );
+    }
+
+    public getAnimalTreatments(animalid: string): Observable<Treatment[]> {
+
+        return this.http.get<Treatment[]>(this.BASE_URL + "/animal/treatments/?animalid=" + animalid).pipe(
+            catchError(this.handleError<Treatment[]>("getAnimalBill")),
         );
     }
 
