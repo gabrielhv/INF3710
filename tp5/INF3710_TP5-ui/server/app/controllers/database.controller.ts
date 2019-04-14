@@ -109,34 +109,35 @@ export class DatabaseController {
         });
     });
 
-        router.put("/animal/update",
-                   (req: Request, res: Response, next: NextFunction) => {
-                    const animalid: string = req.body.animalid;
-                    const animalname: string = req.body.animalname;
-                    const animaltype: string = req.body.animaltype;
-                    const description: string = req.body.description;
-                    const inscriptiondate: string = req.body.inscriptiondate;
-                    const animalstate: string = req.body.animalstate;
-                    const ownerid: string = req.body.ownerid;
-                    this.databaseService.createAnimal(animalid, animalname, animaltype, description, inscriptiondate, animalstate, ownerid);
+        router.post("/animal/update",
+                    (req: Request, res: Response, next: NextFunction) => {
 
-                    this.databaseService.getAnimals().then((result: pg.QueryResult) => {
-            const animals: Animal[] = result.rows.map((a: any) => (
-            {
-            animalid : a.animalid,
-            animalname: a.animalname,
-            animaltype: a.animaltype,
-            description: a.description,
-            inscriptiondate: a.inscriptiondate,
-            animalstate: a.animalstate,
-            ownerid: a.ownerid
-            }));
-            res.json(animals);
+            const animalid: string = req.body.animalid;
+            const animalname: string = req.body.animalname;
+            const animaltype: string = req.body.animaltype;
+            const description: string = req.body.description;
+            const inscriptiondate: string = req.body.inscriptiondate;
+            const animalstate: string = req.body.animalstate;
+            const ownerid: string = req.body.ownerid;
+            this.databaseService.updateAnimal(animalid, animalname, animaltype, description, inscriptiondate, animalstate, ownerid);
+
+            this.databaseService.getAnimals().then((result: pg.QueryResult) => {
+                const animals: Animal[] = result.rows.map((a: any) => ({
+                    animalid : a.animalid,
+                    animalname: a.animalname,
+                    animaltype: a.animaltype,
+                    description: a.description,
+                    inscriptiondate: a.inscriptiondate,
+                    animalstate: a.animalstate,
+                    ownerid: a.ownerid
+                }));
+                res.json(animals);
             }).catch((e: Error) => {
-            console.error(e.stack);
-            res.json(-1);
+                console.error(e.stack);
+                res.json(-1);
+            });
         });
-    });
+
         router.get("/owners",
                    (req: Request, res: Response, next: NextFunction) => {
                     // Send the request to the service and send the response

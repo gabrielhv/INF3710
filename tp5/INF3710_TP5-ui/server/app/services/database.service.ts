@@ -73,7 +73,7 @@ export class DatabaseService {
         return this.pool.query(queryText);
     }
 
-    public UpdateAnimal(animalid: string, animalname: string, animaltype: string,
+    public updateAnimal(animalid: string, animalname: string, animaltype: string,
                         description: string, inscriptiondate: string, animalstate: string, ownerid: string): Promise<pg.QueryResult> {
 
         const values: string[] = [
@@ -86,9 +86,9 @@ export class DatabaseService {
             ownerid,
         ];
         const queryText: string =
-        `UPDATE VetoSansFrontieresDB.animal`
-        + `SET animalname = $2, animaltype = $3, description = $4, inscriptiondate = $5, animalstate = $6`
-        + `WHERE animalid = $1 AND ownerid = $7;`;
+            `UPDATE VetoSansFrontieresDB.animal `
+            + `SET animalid = $1, animalname = $2, animaltype = $3, description = $4, inscriptiondate = $5, animalstate = $6, ownerid = $7 `
+            + `WHERE animalid = $1 AND ownerid = $7;`;
 
         return this.pool.query(queryText, values);
     }

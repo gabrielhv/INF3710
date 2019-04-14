@@ -48,6 +48,12 @@ export class CommunicationService {
         );
     }
 
+    public updateAnimal(animal: any): Observable<number> {
+        return this.http.post<number>(this.BASE_URL + "/animal/update", animal).pipe(
+            catchError(this.handleError<number>("updateAnimal")),
+        );
+    }
+
     public deleteAnimal(animal: Animal): Observable<Animal[]> {
         return this.http.delete<Animal[]>(
             this.BASE_URL + "/animal/delete/?ownerid=" + animal.ownerid + "&animalid=" + animal.animalid).pipe(

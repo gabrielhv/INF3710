@@ -2,5 +2,14 @@
 <div class="dialog">
   <div mat-dialog-content>
     <p>Edit the animal's information</p>
-    <app-animal [isForUpdate]="true"></app-animal>
+    <app-animal 
+      myanimalid={{myAnimal.animalid}}
+      myanimalname={{myAnimal.animalname}}
+      myanimaltype={{myAnimal.animaltype}}
+      mydescription={{myAnimal.description}}
+      myinscriptiondate={{myAnimal.inscriptiondate}}
+      myanimalstate={{myAnimal.animalstate}}
+      myownerid={{myAnimal.ownerid}}
+      [isForUpdate]="true">
+    </app-animal>
 </div>

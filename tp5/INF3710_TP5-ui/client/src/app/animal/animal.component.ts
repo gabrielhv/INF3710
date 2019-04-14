@@ -18,13 +18,13 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class AnimalComponent {
 
-  @Input() public animalid: string;
-  @Input() public animalname: string;
-  @Input() public animaltype: string;
-  @Input() public description: string;
-  @Input() public inscriptiondate: string;
-  @Input() public animalstate: string;
-  @Input() public ownerid: string;
+  @Input() public myanimalid: string;
+  @Input() public myanimalname: string;
+  @Input() public myanimaltype: string;
+  @Input() public mydescription: string;
+  @Input() public myinscriptiondate: string;
+  @Input() public myanimalstate: string;
+  @Input() public myownerid: string;
   @Input() public isForUpdate: boolean;
 
   public readonly descriptionMaxLength: number = 200;
@@ -32,7 +32,7 @@ export class AnimalComponent {
 
   public duplicateError: boolean = false;
 
-  public constructor(private communicationService: CommunicationService) { }
+  public constructor(private communicationService: CommunicationService) {  }
 
   public animalFormControl: FormControl = new FormControl("", [
     Validators.required,
@@ -72,5 +72,32 @@ export class AnimalComponent {
       this.duplicateError = (res === -1);
     });
   }
+
+  public updateAnimal(
+    animalid: string,
+    animalname: string,
+    animaltype: string,
+    description: string,
+    inscriptiondate: string,
+    animalstate: string,
+    ownerid: string ): void {
+
+    const animal: any = {
+      "animalid": animalid,
+      "animalname": animalname,
+      "animaltype": animaltype,
+      "description": description,
+      "inscriptiondate": inscriptiondate,
+      "animalstate": animalstate,
+      "ownerid": ownerid
+    };
+
+    this.communicationService.updateAnimal(animal).subscribe((res: number) => {
+      if (res > 0) {
+        this.communicationService.filter("update");
+      }
+      this.duplicateError = (res === -1);
+    });
+}
 
 }

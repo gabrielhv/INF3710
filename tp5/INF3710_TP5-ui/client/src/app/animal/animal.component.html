@@ -3,39 +3,77 @@
   <div id="error" class="alert alert-danger" role="alert" *ngIf="duplicateError">
     Insertion sur une cle primaire qui existe deja
   </div>
-  <form>
-    <mat-form-field class="animalMatForm">
-      <input matInput placeholder="Animal Id"           [formControl]="animalFormControl" [errorStateMatcher]="matcher" #animalid>
-    </mat-form-field>
-    <mat-form-field class="animalMatForm">
-      <input matInput placeholder="Animal Name"         [formControl]="animalFormControl" [errorStateMatcher]="matcher" #animalname>
-    </mat-form-field>
-    <mat-form-field class="animalMatForm">
-      <input matInput placeholder="Animal Type"         [formControl]="animalFormControl" [errorStateMatcher]="matcher" #animaltype>
-    </mat-form-field>
-    <mat-form-field class="animalMatForm">
-      <textarea matInput placeholder="Animal Description"  [formControl]="animalDescriptionFormControl" [errorStateMatcher]="matcher" #description></textarea>
-    </mat-form-field>
-    <mat-form-field class="animalMatForm">
-      <input matInput placeholder="Inscription Date"    [formControl]="animalFormControl" [errorStateMatcher]="matcher" #inscriptiondate>
-    </mat-form-field>
-    <mat-form-field class="animalMatForm">
-      <input matInput placeholder="Animal State"        [formControl]="animalFormControl" [errorStateMatcher]="matcher" #animalstate>
-    </mat-form-field>
-    <mat-form-field class="animalMatForm">
-      <input matInput placeholder="Owner Id"            [formControl]="animalFormControl" [errorStateMatcher]="matcher" #ownerid>
-    </mat-form-field>
-    <mat-error *ngIf="animalFormControl.hasError('maxlength')">
-      The entries must be <strong>less</strong> than 20 characters long
-    </mat-error>
-    <mat-error *ngIf="animalDescriptionFormControl.hasError('maxlength')">
-      The description must be <strong>less</strong> than 200 characters long
-    </mat-error>
-  </form>
-  <button 
-    mat-raised-button color="primary" 
-    (click)="insertAnimal(animalid.value, animalname.value, animaltype.value, description.value, inscriptiondate.value, animalstate.value, ownerid.value)">
-      <div *ngIf="isForUpdate; else elseBlock">Edit animal</div>
-      <ng-template #elseBlock>Add Animal</ng-template>
-  </button>
+  <div *ngIf="isForUpdate; else elseBlock">
+    <form>
+      <mat-form-field class="animalMatForm">
+        <input matInput value="{{myanimalid}}"           [formControl]="animalFormControl" [errorStateMatcher]="matcher" #animalid>
+      </mat-form-field>
+      <mat-form-field class="animalMatForm">
+        <input matInput value="{{myanimalname}}"         [formControl]="animalFormControl" [errorStateMatcher]="matcher" #animalname>
+      </mat-form-field>
+      <mat-form-field class="animalMatForm">
+        <input matInput value="{{myanimaltype}}"         [formControl]="animalFormControl" [errorStateMatcher]="matcher" #animaltype>
+      </mat-form-field>
+      <mat-form-field class="animalMatForm">
+        <textarea matInput value="{{mydescription}}"  [formControl]="animalDescriptionFormControl" [errorStateMatcher]="matcher" #description></textarea>
+      </mat-form-field>
+      <mat-form-field class="animalMatForm">
+        <input matInput value="{{myinscriptiondate}}"    [formControl]="animalFormControl" [errorStateMatcher]="matcher" #inscriptiondate>
+      </mat-form-field>
+      <mat-form-field class="animalMatForm">
+        <input matInput value="{{myanimalstate}}"        [formControl]="animalFormControl" [errorStateMatcher]="matcher" #animalstate>
+      </mat-form-field>
+      <mat-form-field class="animalMatForm">
+        <input matInput value="{{myownerid}}"            [formControl]="animalFormControl" [errorStateMatcher]="matcher" #ownerid>
+      </mat-form-field>
+      <mat-error *ngIf="animalFormControl.hasError('maxlength')">
+        The entries must be <strong>less</strong> than 20 characters long
+      </mat-error>
+      <mat-error *ngIf="animalDescriptionFormControl.hasError('maxlength')">
+        The description must be <strong>less</strong> than 200 characters long
+      </mat-error>
+    </form>
+    <button 
+      mat-raised-button color="primary" 
+      (click)="updateAnimal(animalid.value, animalname.value, animaltype.value, description.value, inscriptiondate.value, animalstate.value, ownerid.value)">
+      Edit Animal
+    </button>
+  </div>
+
+  <ng-template #elseBlock>
+    <form>
+      <mat-form-field class="animalMatForm">
+        <input matInput placeholder="Animal Id"           [formControl]="animalFormControl" [errorStateMatcher]="matcher" #animalid>
+      </mat-form-field>
+      <mat-form-field class="animalMatForm">
+        <input matInput placeholder="Animal Name"         [formControl]="animalFormControl" [errorStateMatcher]="matcher" #animalname>
+      </mat-form-field>
+      <mat-form-field class="animalMatForm">
+        <input matInput placeholder="Animal Type"         [formControl]="animalFormControl" [errorStateMatcher]="matcher" #animaltype>
+      </mat-form-field>
+      <mat-form-field class="animalMatForm">
+        <textarea matInput placeholder="Animal Description"  [formControl]="animalDescriptionFormControl" [errorStateMatcher]="matcher" #description></textarea>
+      </mat-form-field>
+      <mat-form-field class="animalMatForm">
+        <input matInput placeholder="Inscription Date"    [formControl]="animalFormControl" [errorStateMatcher]="matcher" #inscriptiondate>
+      </mat-form-field>
+      <mat-form-field class="animalMatForm">
+        <input matInput placeholder="Animal State"        [formControl]="animalFormControl" [errorStateMatcher]="matcher" #animalstate>
+      </mat-form-field>
+      <mat-form-field class="animalMatForm">
+        <input matInput placeholder="Owner Id"            [formControl]="animalFormControl" [errorStateMatcher]="matcher" #ownerid>
+      </mat-form-field>
+      <mat-error *ngIf="animalFormControl.hasError('maxlength')">
+        The entries must be <strong>less</strong> than 20 characters long
+      </mat-error>
+      <mat-error *ngIf="animalDescriptionFormControl.hasError('maxlength')">
+        The description must be <strong>less</strong> than 200 characters long
+      </mat-error>
+    </form>
+    <button 
+      mat-raised-button color="primary" 
+      (click)="insertAnimal(animalid.value, animalname.value, animaltype.value, description.value, inscriptiondate.value, animalstate.value, ownerid.value)">
+      Add Animal
+    </button>
+  </ng-template>
 </div>
