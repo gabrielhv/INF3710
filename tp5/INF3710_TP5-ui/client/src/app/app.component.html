@@ -29,10 +29,15 @@
 
 <div id="ht" style="text-align:center" *ngIf="route != '/room'">
   <button type="button" class="btn btn-primary" (click)="getAnimals()">Get Animals</button>
-  <table id ="animalinfos" align="center" border="1" width="60%">
+  <table id ="animalinfos" align="center" border="1" width="80%">
     <thead>
-      <th>Animal name</th>
+      <th>ID</th>
+      <th>Name</th>
       <th>Type</th>
+      <th>Description</th>
+      <th>Inscription date</th>
+      <th>State</th>
+      <th>Owner ID</th>
       <th>Treatments</th>
       <th>Bills</th>
       <th>Modify</th>
@@ -40,8 +45,13 @@
     </thead>
     <tbody>
       <tr *ngFor="let animal of animals">
+        <td> {{animal.animalid}} </td>
         <td> {{animal.animalname}}</td>
         <td> {{animal.animaltype}} </td>
+        <td> {{animal.description}} </td>
+        <td> {{animal.inscriptiondate}} </td>
+        <td> {{animal.animalstate}} </td>
+        <td> {{animal.ownerid}} </td>
         <td><button mat-raised-button color="accent" class="getTreatmentsButton" (click)="getAnimalTreatments(animal.animalid)"><mat-icon>local_hospital</mat-icon></button></td>
         <td><button mat-raised-button color="accent" class="getBillButton" (click)="getAnimalBill(animal.animalid)"><mat-icon>receipt</mat-icon></button></td>
         <td><app-dialog-overview [myAnimal]="animal"></app-dialog-overview></td>
