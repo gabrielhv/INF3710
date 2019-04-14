@@ -2,7 +2,6 @@ import { Location } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { Animal } from "../../../common/tables/Animal";
-import { Hotel } from "../../../common/tables/Hotel";
 import { Treatment } from "../../../common/tables/Treatment";
 import { CommunicationService } from "./communication.service";
 
@@ -16,16 +15,11 @@ export class AppComponent implements OnInit {
 
     public constructor(private communicationService: CommunicationService, location: Location, router: Router) {
         router.events.subscribe((val) => {
-            if (location.path() !== "") {
-              this.route = location.path();
-            } else {
-              this.route = "";
-            }
+            this.route = (location.path() !== "") ? location.path() : "";
           });
     }
 
     public readonly title: string = "INF3710 TP5";
-    public hotels: Hotel[] = [];
     public animals: Animal[] = [];
 
     public ngOnInit(): void {
@@ -35,20 +29,10 @@ export class AppComponent implements OnInit {
         });
     }
 
-    public getHotels(): void {
-        this.communicationService.getHotels().subscribe((hotels: Hotel[]) => {
-            this.hotels = hotels;
-        });
-    }
-
     public getAnimals(): void {
         this.communicationService.getAnimals().subscribe((animals: Animal[]) => {
             this.animals = animals;
         });
-    }
-
-    public modifyAnimal(animal: Animal): void {
-        
     }
 
     public getAnimalBill(animalid: string): void {
@@ -63,7 +47,7 @@ export class AppComponent implements OnInit {
 
     public getAnimalTreatments(animalid: string): void {
         this.communicationService.getAnimalTreatments(animalid).subscribe((treatments: Treatment[]) => {
-            if (treatments) {
+            if (treatments.length > 0) {
                 let message: string = "Treatments: \n\n";
                 treatments.forEach((treatment) => {
                     message += "Treatment number: " + treatment.treatmentnumber + "\n";
