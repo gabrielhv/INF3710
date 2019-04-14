@@ -1,5 +1,6 @@
-import {Component, Inject} from "@angular/core";
+import {Component, Inject, Input} from "@angular/core";
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from "@angular/material";
+import { Animal } from "../../../../common/tables/Animal";
 
 export interface DialogData {
   animal: string;
@@ -13,6 +14,8 @@ export interface DialogData {
 })
 export class DialogOverviewComponent {
 
+  @Input() public myAnimal: Animal;
+
   public animal: string;
   public name: string;
 
@@ -25,7 +28,6 @@ export class DialogOverviewComponent {
     });
 
     dialogRef.afterClosed().subscribe((result: any) => {
-      console.log("The dialog was closed");
       this.animal = result;
     });
   }

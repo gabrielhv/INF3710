@@ -25,6 +25,7 @@ export class AnimalComponent {
   @Input() public inscriptiondate: string;
   @Input() public animalstate: string;
   @Input() public ownerid: string;
+  @Input() public isForUpdate: boolean;
 
   public readonly descriptionMaxLength: number = 200;
   public readonly entryMaxLength: number = 20;

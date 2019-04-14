@@ -35,6 +35,7 @@
   <button 
     mat-raised-button color="primary" 
     (click)="insertAnimal(animalid.value, animalname.value, animaltype.value, description.value, inscriptiondate.value, animalstate.value, ownerid.value)">
-    Add Animal
+      <div *ngIf="isForUpdate; else elseBlock">Edit animal</div>
+      <ng-template #elseBlock>Add Animal</ng-template>
   </button>
 </div>
