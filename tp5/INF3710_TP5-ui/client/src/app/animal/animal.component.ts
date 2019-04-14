@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { FormControl, FormGroupDirective, NgForm, Validators } from "@angular/forms";
 import { ErrorStateMatcher } from "@angular/material/core";
 import { CommunicationService } from "../communication.service";
@@ -17,6 +17,15 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ["./animal.component.css"]
 })
 export class AnimalComponent {
+
+  @Input() public animalid: string;
+  @Input() public animalname: string;
+  @Input() public animaltype: string;
+  @Input() public description: string;
+  @Input() public inscriptiondate: string;
+  @Input() public animalstate: string;
+  @Input() public ownerid: string;
+
   public readonly descriptionMaxLength: number = 200;
   public readonly entryMaxLength: number = 20;
 
