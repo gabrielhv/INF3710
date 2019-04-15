@@ -8,7 +8,7 @@ import {data} from "../populateDB_VSF";
 export class DatabaseService {
 
     public connectionConfig: pg.ConnectionConfig = {
-        user: "normal_user",
+        user: "admin",
         database: "VetoSansFrontieresDB",
         password: "admin",
         port: 5432,
@@ -19,16 +19,6 @@ export class DatabaseService {
     public constructor() {
         this.pool.connect();
     }
-
-    // A MODIFIER POUR VOTRE BD
-    // public connectionConfig: pg.ConnectionConfig = {
-        //     user: "normal_user",
-        //     database: "VetoSansFrontieresDB",
-        //     password: "admin",
-        //     port: 5432,
-        //     host: "127.0.0.1",
-        //     keepAlive : true
-        // };
 
     private pool: pg.Pool = new pg.Pool(this.connectionConfig);
 
