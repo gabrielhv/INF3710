@@ -72,8 +72,6 @@ export class AppComponent implements OnInit {
         });
     }
 
-
-
     public getAnimalBill(animalid: string): void {
         this.communicationService.getAnimalBill(animalid).subscribe((bill: number) => {
             if (bill) {

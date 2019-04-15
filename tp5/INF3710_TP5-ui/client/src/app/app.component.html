@@ -19,7 +19,8 @@
       <app-animal [isForUpdate]="false"></app-animal>
   </mat-tab>
   <mat-tab label="Recherche" class="navtab">
-      Component de recherche
+    <br>
+      Search for an animal by name: 
       <mat-form-field>
       <input type="text"  matInput [formControl]="nameSuggestionsControl" placeholder="Animal Name" [matAutocomplete]="auto" [errorStateMatcher]="matcher" #searchEntry (input)="getAnimalsNamesSuggestion($event.target.value)">
       <mat-autocomplete #auto="matAutocomplete">
