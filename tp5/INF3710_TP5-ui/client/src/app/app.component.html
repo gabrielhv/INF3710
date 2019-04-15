@@ -24,7 +24,7 @@
       <mat-form-field>
       <input type="text"  matInput [formControl]="nameSuggestionsControl" placeholder="Animal Name" [matAutocomplete]="auto" [errorStateMatcher]="matcher" #searchEntry (input)="getAnimalsNamesSuggestion($event.target.value)">
       <mat-autocomplete #auto="matAutocomplete">
-        <mat-option *ngFor="let name of filteredSuggestions | async" [value]="nameSuggestions">
+        <mat-option *ngFor="let name of filteredSuggestions | async" [value]="name">
           {{name}}
         </mat-option>
       </mat-autocomplete>
