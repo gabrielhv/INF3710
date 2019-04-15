@@ -30,6 +30,7 @@ export class AnimalComponent {
   public readonly descriptionMaxLength: number = 200;
   public readonly entryMaxLength: number = 20;
 
+  public ownerIDs: string[];
   public duplicateError: boolean = false;
 
   public constructor(private communicationService: CommunicationService) {  }
@@ -74,13 +75,13 @@ export class AnimalComponent {
   }
 
   public updateAnimal(
-    animalid: string,
-    animalname: string,
-    animaltype: string,
-    description: string,
-    inscriptiondate: string,
-    animalstate: string,
-    ownerid: string ): void {
+                      animalid: string,
+                      animalname: string,
+                      animaltype: string,
+                      description: string,
+                      inscriptiondate: string,
+                      animalstate: string,
+                      ownerid: string ): void {
 
     const animal: any = {
       "animalid": animalid,
@@ -98,6 +99,16 @@ export class AnimalComponent {
       }
       this.duplicateError = (res === -1);
     });
-}
+  }
+
+  public updateOwnerIDs(): void {
+    this.communicationService.getAllOwnerIDs().subscribe((ownerIDs: string[]) => {
+      this.ownerIDs = ownerIDs;
+    });
+  }
+
+  public selectOwnerID(ownerID: string): void {
+    this.myownerid = ownerID;
+  }
 
 }

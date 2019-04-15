@@ -42,6 +42,13 @@ export class CommunicationService {
         );
     }
 
+    public getAllOwnerIDs(): Observable<string[]> {
+
+        return this.http.get<string[]>(this.BASE_URL + "/owners").pipe(
+            catchError(this.handleError<string[]>("getAllOwnerIDs")),
+        );
+    }
+
     public insertAnimal(animal: any): Observable<number> {
         return this.http.post<number>(this.BASE_URL + "/animal/insert", animal).pipe(
             catchError(this.handleError<number>("insertAnimal")),

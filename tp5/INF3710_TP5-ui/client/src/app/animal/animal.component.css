@@ -14,3 +14,49 @@
     margin:0px auto;
     display: block;
 }
+
+
+.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+  }
+  
+  .dropdown {
+      position: absolute;
+      margin-left: 20%;
+  }
+
+  .dropdownEdit {
+    position: relative;
+  }
+  
+  .dropdown-content {
+    display: none;
+    min-width: 160px;
+    z-index: 1;
+  }
+  
+  .dropdownEdit-content {
+    display: none;
+    min-width: 160px;
+    z-index: 1;
+  }
+
+  
+  
+  .dropdown:hover .dropdown-content {display: block;}
+  
+  .dropdown:hover .dropbtn {background-color: #3e8e41;}
+  
+  .dropdownEdit:hover .dropdown-content {
+    display: block;
+  }
+  
+  .dropdownEdit:hover .dropbtn {background-color: #3e8e41;}
+  
+  ul {
+    list-style: none;
+  }
