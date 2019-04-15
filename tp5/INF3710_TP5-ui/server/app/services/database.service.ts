@@ -94,13 +94,13 @@ export class DatabaseService {
     }
 
     public getOwnersID(): Promise<pg.QueryResult> {
-        const queryText: string = `SELECT ownerid FROM VetoSansFrontieres.owner;`;
+        const queryText: string = `SELECT ownerid FROM VetoSansFrontieresDB.owner;`;
 
         return this.pool.query(queryText);
     }
 
     // pour les suggestions de la search bar
-    public GetAnimalNamesFromSearchEntry(searchEntry: string): Promise<pg.QueryResult>{
+    public GetAnimalNamesFromSearchEntry(searchEntry: string): Promise<pg.QueryResult> {
 
         const queryText: string =
             "SELECT a.animalname FROM VetoSansFrontieresDB.animal a WHERE lower(a.animalname) LIKE lower('%" + searchEntry + "%');";
@@ -108,7 +108,7 @@ export class DatabaseService {
         return this.pool.query(queryText);
     }
 
-    public GetAnimalsFromAnimalName(searchEntry: string): Promise<pg.QueryResult>{
+    public GetAnimalsFromAnimalName(searchEntry: string): Promise<pg.QueryResult> {
         const queryText: string =
             "SELECT * FROM VetoSansFrontieresDB.animal a WHERE lower(a.animalname) LIKE lower('%" + searchEntry + "%');";
 
