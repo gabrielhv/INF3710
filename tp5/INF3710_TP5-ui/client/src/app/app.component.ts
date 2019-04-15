@@ -1,6 +1,9 @@
 import { Location } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
+import {FormControl} from "@angular/forms";
 import { Router } from "@angular/router";
+import { Observable } from "rxjs";
+import { map, startWith } from "rxjs/operators";
 import { Animal } from "../../../common/tables/Animal";
 import { Treatment } from "../../../common/tables/Treatment";
 import { CommunicationService } from "./communication.service";
@@ -11,6 +14,10 @@ import { CommunicationService } from "./communication.service";
   styleUrls: ["./app.component.css"],
 })
 export class AppComponent implements OnInit {
+    public nameSuggestionsControl: FormControl = new FormControl();
+    public nameSuggestions: string[] = [];
+    public filteredSuggestions: Observable<string[]>;
+
     public route: string;
 
     public constructor(private communicationService: CommunicationService, location: Location, router: Router) {
@@ -21,19 +28,51 @@ export class AppComponent implements OnInit {
 
     public readonly title: string = "INF3710 TP5";
     public animals: Animal[] = [];
+    public animalsSearch: Animal[] = [];
 
     public ngOnInit(): void {
-        this.communicationService.listen().subscribe((m:any) => {
+        this.communicationService.listen().subscribe((m: any) => {
             console.log(m);
             this.getAnimals();
         });
+
+        this.filteredSuggestions = this.nameSuggestionsControl.valueChanges
+      .pipe(
+        startWith(""),
+        map((value) => this._filter(value))
+      );
+
+    }
+
+    public _filter(value: string): string[] {
+        const filterValue = value;
+        return this.nameSuggestions.filter((option) => option.includes(filterValue));
     }
 
     public getAnimals(): void {
         this.communicationService.getAnimals().subscribe((animals: Animal[]) => {
             this.animals = animals;
+
+            this.nameSuggestions = [];
+            for (let i = 0; i < animals.length; i++) {
+                this.nameSuggestions.push(animals[i].animalname);
+            }
         });
     }
+
+    public getAnimalsNamesSuggestions(searchEntry: string): void {
+        this.communicationService.getAnimalsSuggestions(searchEntry).subscribe((result: string[]) => {
+            this.nameSuggestions = result;
+        });
+    }
+
+    public getAnimalsFromSearchEntry(searchEntry: string): void {
+        this.communicationService.getAnimalsSearchResult(searchEntry).subscribe((result: Animal[]) => {
+            this.animalsSearch = result;
+        });
+    }
+
+
 
     public getAnimalBill(animalid: string): void {
         this.communicationService.getAnimalBill(animalid).subscribe((bill: number) => {

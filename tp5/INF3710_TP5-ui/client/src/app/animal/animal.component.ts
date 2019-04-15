@@ -29,7 +29,6 @@ export class AnimalComponent {
 
   public readonly descriptionMaxLength: number = 200;
   public readonly entryMaxLength: number = 20;
-
   public duplicateError: boolean = false;
 
   public constructor(private communicationService: CommunicationService) {  }

@@ -2,10 +2,12 @@ import { CommonModule } from "@angular/common";
 import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import {MatNativeDateModule} from "@angular/material";
 import { MatButtonModule } from "@angular/material/button";
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatIconModule } from "@angular/material/icon";
 import { MatInputModule } from "@angular/material/input";
+import {MatAutocompleteModule} from '@angular/material/autocomplete'; 
 import { MatTabsModule } from "@angular/material/tabs";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -34,7 +36,9 @@ import { CommunicationService } from "./communication.service";
     MatIconModule,
     MatInputModule,
     MatTabsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatNativeDateModule,
+    MatAutocompleteModule
   ],
   entryComponents: [
     DialogOverviewDialogComponent

@@ -27,6 +27,18 @@ export class CommunicationService {
             catchError(this.handleError<Animal[]>("getAnimals")),
         );
     }
+    
+    public getAnimalsSuggestions(searchEntry: string): Observable<any[]> {
+        return this.http.get<Animal[]>(this.BASE_URL + "/animalnamesSuggestions/?animalname=" + searchEntry).pipe(
+            catchError(this.handleError<Animal[]>("getAnimalsNameSuggestions")),
+        );
+    }
+
+    public getAnimalsSearchResult(searchEntry: string): Observable<any[]> {
+        return this.http.get<Animal[]>(this.BASE_URL + "/animalsSearch/?animalname=" + searchEntry).pipe(
+            catchError(this.handleError<Animal[]>("getAnimalsSearchResult")),
+        );
+    }
 
     public getAnimalBill(animalid: string): Observable<number> {
 

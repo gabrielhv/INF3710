@@ -151,7 +151,7 @@ export class DatabaseController {
 
         router.get("/animalnamesSuggestions",
                    (req: Request, res: Response, next: NextFunction) => {
-            const searchEntry: string = req.body;
+            const searchEntry: string = req.query.animalname;
          // Send the request to the service and send the response
             this.databaseService.GetAnimalNamesFromSearchEntry(searchEntry).then((result: pg.QueryResult) => {
              const animalnames: string[] = result.rows.map((row: any) => row.animalname);
@@ -163,7 +163,7 @@ export class DatabaseController {
 
         router.get("/animalsSearch",
                    (req: Request, res: Response, next: NextFunction) => {
-            const animalname: string = req.body;
+            const animalname: string = req.query.animalname;
             // Send the request to the service and send the response
             this.databaseService.GetAnimalsFromAnimalName(animalname).then((result: pg.QueryResult) => {
             const animals: Animal[] = result.rows.map((a: any) => (

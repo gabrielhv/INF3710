@@ -8,7 +8,7 @@ import {data} from "../populateDB_VSF";
 export class DatabaseService {
 
     public connectionConfig: pg.ConnectionConfig = {
-        user: "postgres",
+        user: "normal_user",
         database: "VetoSansFrontieresDB",
         password: "admin",
         port: 5432,
@@ -103,14 +103,14 @@ export class DatabaseService {
     public GetAnimalNamesFromSearchEntry(searchEntry: string): Promise<pg.QueryResult>{
 
         const queryText: string =
-            "SELECT a.animalname FROM VetoSansFrontieresDB.animal a WHERE LOWER(a.animalname) LIKE LOWER'%" + searchEntry + "%';";
+            "SELECT a.animalname FROM VetoSansFrontieresDB.animal a WHERE lower(a.animalname) LIKE lower('%" + searchEntry + "%');";
 
         return this.pool.query(queryText);
     }
 
     public GetAnimalsFromAnimalName(searchEntry: string): Promise<pg.QueryResult>{
         const queryText: string =
-            "SELECT * FROM VetoSansFrontieresDB.Animal a WHERE LOWER(a.animalname) LIKE LOWER'%" + searchEntry + "%';";
+            "SELECT * FROM VetoSansFrontieresDB.animal a WHERE lower(a.animalname) LIKE lower('%" + searchEntry + "%');";
 
         return this.pool.query(queryText);
     }
